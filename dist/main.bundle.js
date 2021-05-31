@@ -160,10 +160,10 @@ var AppModule = (function () {
 
 var routes = [
     { path: '/', component: __WEBPACK_IMPORTED_MODULE_1__welcome_welcome_component__["a" /* WelcomeComponent */] },
-    { path: '/restaurant/:id', component: __WEBPACK_IMPORTED_MODULE_2__restaurant_restaurant_component__["a" /* RestaurantComponent */] },
-    { path: '/restaurant', component: __WEBPACK_IMPORTED_MODULE_3__restaurant_list_restaurant_list_component__["a" /* RestaurantListComponent */] },
-    { path: '/user/:id', component: __WEBPACK_IMPORTED_MODULE_4__user_user_component__["a" /* UserComponent */] },
-    { path: '/savedlist/:id', component: __WEBPACK_IMPORTED_MODULE_5__savedlist_savedlist_component__["a" /* SavedlistComponent */] }
+    { path: 'restaurant/:id', component: __WEBPACK_IMPORTED_MODULE_2__restaurant_restaurant_component__["a" /* RestaurantComponent */] },
+    { path: 'restaurant', component: __WEBPACK_IMPORTED_MODULE_3__restaurant_list_restaurant_list_component__["a" /* RestaurantListComponent */] },
+    { path: 'user/:id', component: __WEBPACK_IMPORTED_MODULE_4__user_user_component__["a" /* UserComponent */] },
+    { path: 'savedlist/:id', component: __WEBPACK_IMPORTED_MODULE_5__savedlist_savedlist_component__["a" /* SavedlistComponent */] }
 ];
 var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forRoot(routes);
 //# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/app.routing.js.map
