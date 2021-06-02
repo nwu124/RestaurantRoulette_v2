@@ -31,16 +31,16 @@ class App {
 
     private routes(): void {
 
-      let router = express.Router();
+        let router = express.Router();
 
-      this.expressApp.use( (req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-      });
+        this.expressApp.use( (req, res, next) => {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
 
-      // this.expressApp.use('/', router);
-      // this.expressApp.use('/json', expressApp.static(__dirname+'/json'));
+        // this.expressApp.use('/', router);
+        // this.expressApp.use('/json', expressApp.static(__dirname+'/json'));
 
         //****************************************
         //SAVED LISTS
@@ -109,11 +109,9 @@ class App {
         });
 
         this.expressApp.use('/', router);
-
-        this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));
         this.expressApp.use('/images', express.static(__dirname + '/img'));
-        // this.expressApp.use('/', express.static(__dirname + '/pages'));
-        this.expressApp.use('/', express.static(__dirname + '/dist'));
+        this.expressApp.use('/', express.static(__dirname + '/angularDist'));
+        console.log("__dirname: " + __dirname);
     }
 }
 

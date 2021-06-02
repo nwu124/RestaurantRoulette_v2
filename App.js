@@ -90,10 +90,9 @@ var App = /** @class */ (function () {
             _this.idGenerator++;
         });
         this.expressApp.use('/', router);
-        this.expressApp.use('/app/json/', express.static(__dirname + '/app/json'));
         this.expressApp.use('/images', express.static(__dirname + '/img'));
-        // this.expressApp.use('/', express.static(__dirname + '/pages'));
-        this.expressApp.use('/', express.static(__dirname + '/dist'));
+        this.expressApp.use('/', express.static(__dirname + '/angularDist'));
+        console.log("__dirname: " + __dirname);
     };
     return App;
 }());
