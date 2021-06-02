@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\r\n    <div class=\"container-fluid\">\r\n        <div class=\"navbar-header\">\r\n        <a class=\"navbar-brand\" href=\"javascript:initXHR('home')\">Restaurant Roulette</a>\r\n        </div>\r\n        <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n          <li><a href=\"#/\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Home</a></li>\r\n          <li><a href=\"user/1\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">User</a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n            <li><a href=\"#\">Login</a></li>\r\n        </ul>\r\n        </div><!--/.nav-collapse -->\r\n    </div><!--/.container-fluid -->\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n    <div class=\"container-fluid\">\r\n        <div class=\"navbar-header\">\r\n        <a class=\"navbar-brand\" href=\"javascript:initXHR('home')\">Restaurant Roulette</a>\r\n        </div>\r\n        <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n          <li><a class=\"dropdown-toggle\" [routerLink]=\"['/']\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Home</a></li>\r\n          <li><a class=\"dropdown-toggle\" [routerLink]=\"['/user/1']\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">User</a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n            <li><a href=\"#\">Login</a></li>\r\n        </ul>\r\n        </div><!--/.nav-collapse -->\r\n    </div><!--/.container-fluid -->\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -61,7 +61,7 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/app.component.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/app.component.js.map
 
 /***/ }),
 
@@ -72,19 +72,19 @@ var AppComponent = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("./node_modules/@angular/http/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__("./src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__welcome_welcome_component__ = __webpack_require__("./src/app/welcome/welcome.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common__ = __webpack_require__("./node_modules/@angular/common/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routing__ = __webpack_require__("./src/app/app.routing.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_app_rr_service_service__ = __webpack_require__("./src/app/rr-service.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__search_bar_search_bar_component__ = __webpack_require__("./src/app/search-bar/search-bar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__restaurant_restaurant_component__ = __webpack_require__("./src/app/restaurant/restaurant.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__user_user_component__ = __webpack_require__("./src/app/user/user.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__savedlist_savedlist_component__ = __webpack_require__("./src/app/savedlist/savedlist.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__savedlist_sl_item_sl_item_component__ = __webpack_require__("./src/app/savedlist/sl-item/sl-item.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__restaurant_list_restaurant_list_component__ = __webpack_require__("./src/app/restaurant-list/restaurant-list.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("./node_modules/@angular/http/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__welcome_welcome_component__ = __webpack_require__("./src/app/welcome/welcome.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__("./node_modules/@angular/common/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_routing__ = __webpack_require__("./src/app/app.routing.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_app_rr_service_service__ = __webpack_require__("./src/app/rr-service.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__search_bar_search_bar_component__ = __webpack_require__("./src/app/search-bar/search-bar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__restaurant_restaurant_component__ = __webpack_require__("./src/app/restaurant/restaurant.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__user_user_component__ = __webpack_require__("./src/app/user/user.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__savedlist_savedlist_component__ = __webpack_require__("./src/app/savedlist/savedlist.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__savedlist_sl_item_sl_item_component__ = __webpack_require__("./src/app/savedlist/sl-item/sl-item.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__restaurant_list_restaurant_list_component__ = __webpack_require__("./src/app/restaurant-list/restaurant-list.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -115,29 +115,29 @@ var AppModule = (function () {
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["R" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__welcome_welcome_component__["a" /* WelcomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__search_bar_search_bar_component__["a" /* SearchBarComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__restaurant_restaurant_component__["a" /* RestaurantComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__user_user_component__["a" /* UserComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__savedlist_savedlist_component__["a" /* SavedlistComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__savedlist_sl_item_sl_item_component__["a" /* SlItemComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__restaurant_list_restaurant_list_component__["a" /* RestaurantListComponent */]
+                __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__welcome_welcome_component__["a" /* WelcomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__search_bar_search_bar_component__["a" /* SearchBarComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__restaurant_restaurant_component__["a" /* RestaurantComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__user_user_component__["a" /* UserComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__savedlist_savedlist_component__["a" /* SavedlistComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__savedlist_sl_item_sl_item_component__["a" /* SlItemComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__restaurant_list_restaurant_list_component__["a" /* RestaurantListComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_14__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_6__app_routing__["a" /* routing */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_7__app_routing__["a" /* routing */],
             ],
-            providers: [{ provide: __WEBPACK_IMPORTED_MODULE_5__angular_common__["a" /* APP_BASE_HREF */], useValue: '/' }, __WEBPACK_IMPORTED_MODULE_7_app_rr_service_service__["a" /* rrService */]],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
+            providers: [{ provide: __WEBPACK_IMPORTED_MODULE_6__angular_common__["a" /* APP_BASE_HREF */], useValue: '/' }, __WEBPACK_IMPORTED_MODULE_8_app_rr_service_service__["a" /* rrService */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/app.module.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/app.module.js.map
 
 /***/ }),
 
@@ -159,14 +159,14 @@ var AppModule = (function () {
 
 
 var routes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_1__welcome_welcome_component__["a" /* WelcomeComponent */] },
+    { path: '/', component: __WEBPACK_IMPORTED_MODULE_1__welcome_welcome_component__["a" /* WelcomeComponent */] },
     { path: 'restaurant/:id', component: __WEBPACK_IMPORTED_MODULE_2__restaurant_restaurant_component__["a" /* RestaurantComponent */] },
     { path: 'restaurant', component: __WEBPACK_IMPORTED_MODULE_3__restaurant_list_restaurant_list_component__["a" /* RestaurantListComponent */] },
     { path: 'user/:id', component: __WEBPACK_IMPORTED_MODULE_4__user_user_component__["a" /* UserComponent */] },
     { path: 'savedlist/:id', component: __WEBPACK_IMPORTED_MODULE_5__savedlist_savedlist_component__["a" /* SavedlistComponent */] }
 ];
 var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forRoot(routes);
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/app.routing.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/app.routing.js.map
 
 /***/ }),
 
@@ -180,7 +180,7 @@ module.exports = ""
 /***/ "./src/app/restaurant-list/restaurant-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>Restaurant List</h3>\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Restaurant</th>\r\n          <th width=\"5%\">City</th>\r\n          <th width=\"5%\">State</th>\r\n          <th width=\"5%\">Zip</th>\r\n          <th width=\"5%\">Price</th>\r\n          <th width=\"5%\">URL</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let restaurant of restaurantList\">\r\n          <td><a [routerLink]=\"['/restaurant/', restaurant.restaurantId]\">{{restaurant.name}}</a></td>\r\n          <td>{{restaurant.locationCity}}</td>\r\n          <td>{{restaurant.locationState}}</td>\r\n          <td>{{restaurant.locationZip}}</td>\r\n          <td>{{restaurant.price}}</td>\r\n          <td><a href=\"{{restaurant.url}}\">{{restaurant.url}}</a></td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Roulette</th>\r\n          <th width=\"5%\"></th>\r\n          <th width=\"5%\">Name</th>\r\n          <th width=\"5%\">ID</th>\r\n          <th width=\"5%\"></th>\r\n          <th width=\"5%\"></th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td><a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"pickRestaurant()\">Pick A Restaurant</a></td>\r\n          <td></td>\r\n          <td><textarea [(ngModel)]=\"restaurantIdDispName\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"restaurantIdDispId\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"longDisp\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"latDisp\" disabled=\"true\"></textarea></td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>Restaurant List</h3>\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Restaurant</th>\r\n          <th width=\"5%\">City</th>\r\n          <th width=\"5%\">State</th>\r\n          <th width=\"5%\">Zip</th>\r\n          <th width=\"5%\">Price</th>\r\n          <th width=\"5%\">URL</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let restaurant of restaurantList\">\r\n          <td><a [routerLink]=\"['/restaurant/', restaurant.restaurantId]\">{{restaurant.name}}</a></td>\r\n          <td>{{restaurant.locationCity}}</td>\r\n          <td>{{restaurant.locationState}}</td>\r\n          <td>{{restaurant.locationZip}}</td>\r\n          <td>{{restaurant.price}}</td>\r\n          <td><a href=\"{{restaurant.url}}\">{{restaurant.url}}</a></td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Roulette</th>\r\n          <th width=\"5%\"></th>\r\n          <th width=\"5%\">Name</th>\r\n          <th width=\"5%\">ID</th>\r\n          <th width=\"5%\"></th>\r\n          <th width=\"5%\"></th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td><a [routerLink]=\"['/list']\" class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"pickRestaurant()\">Pick A Restaurant</a></td>\r\n          <td></td>\r\n          <td><textarea [(ngModel)]=\"restaurantIdDispName\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"restaurantIdDispId\" disabled=\"true\"></textarea></td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -190,7 +190,8 @@ module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-defaul
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RestaurantListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rr_service_service__ = __webpack_require__("./src/app/rr-service.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rr_service_service__ = __webpack_require__("./src/app/rr-service.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -202,54 +203,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var RestaurantListComponent = (function () {
-    function RestaurantListComponent(service) {
+    function RestaurantListComponent(route, service) {
         var _this = this;
-        this.service = service;
-        this.myService = service;
-        console.log("Service " + this.myService);
-        this.myService.getAllRestaurants()
-            .subscribe(function (result) { return _this.restaurantList = result; }, function () {
-            console.log('GET RestaurantList call ERROR');
-        }, function () {
+        this.route = route;
+        service.getAllRestaurants()
+            .subscribe(function (result) { return _this.restaurantList = result; }, function () { console.log('GET RestaurantList call ERROR'); }, function () {
             console.log('GET RestaurantList call OK, first id: ' + _this.restaurantList[0].restaurantId);
         });
     }
     RestaurantListComponent.prototype.pickRestaurant = function () {
         var randomIndex = Math.floor((Math.random() * this.restaurantList.length));
-        var selectedRestaurant = this.restaurantList[randomIndex];
-        this.restaurantIdDispName = selectedRestaurant.name;
-        this.restaurantIdDispId = selectedRestaurant.restaurantId;
-        // alert("Your restaurant is " + selectedRestaurant.name + " with ID " + selectedRestaurant.restaurantId);
-        this.findZipCode();
-    };
-    RestaurantListComponent.prototype.findZipCode = function () {
-        if (navigator.geolocation) {
-            window.navigator.geolocation.getCurrentPosition(function (pos) {
-                var _this = this;
-                console.log(pos);
-                console.log("Service " + this.myService);
-                this.service.getAllRestaurants()
-                    .subscribe(function (result) { return _this.restaurantList = result; }, function () {
-                    console.log('GET RestaurantList call ERROR');
-                }, function () {
-                    console.log('GET RestaurantList call OK, first id: ' + _this.restaurantList[0].restaurantId);
-                });
-                // this.rrService.callGMapsGeocode(pos.coords.latitude, pos.coords.longitude)
-                //   .subscribe(
-                //     result => this.zipResponse = result,
-                //     () => {
-                //       console.log('GET Google Maps API zipcode call ERROR');
-                //     },
-                //     () => {
-                //       console.log('GET Google Maps API zipcode call OK, first id: ' + this.zipResponse);
-                //     }
-                //   );
-            });
-        }
-        else {
-            console.log("No support for geolocation");
-        }
+        var selectedRestarant = this.restaurantList[randomIndex];
+        this.restaurantIdDispName = selectedRestarant.name;
+        this.restaurantIdDispId = selectedRestarant.restaurantId;
+        alert("Your restaurant is " + selectedRestarant.name + " with ID " + selectedRestarant.restaurantId);
     };
     RestaurantListComponent.prototype.ngOnInit = function () {
     };
@@ -259,12 +228,12 @@ var RestaurantListComponent = (function () {
             template: __webpack_require__("./src/app/restaurant-list/restaurant-list.component.html"),
             styles: [__webpack_require__("./src/app/restaurant-list/restaurant-list.component.css")]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__rr_service_service__["a" /* rrService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__rr_service_service__["a" /* rrService */]) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__rr_service_service__["a" /* rrService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__rr_service_service__["a" /* rrService */]) === 'function' && _b) || Object])
     ], RestaurantListComponent);
     return RestaurantListComponent;
-    var _a;
+    var _a, _b;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/restaurant-list.component.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/restaurant-list.component.js.map
 
 /***/ }),
 
@@ -335,7 +304,7 @@ var RestaurantComponent = (function () {
     return RestaurantComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/restaurant.component.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/restaurant.component.js.map
 
 /***/ }),
 
@@ -362,40 +331,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var rrService = (function () {
     function rrService(http) {
         this.http = http;
-        this.port = 8080;
-        this.expressHost = 'localhost';
-        this.gMapsApiURL = 'http://maps.googleapis.com/maps/api/geocode/json';
     }
     rrService.prototype.getAllSavedLists = function () {
+        // return this.http.get( 'http://localhost:8080/app/savedlist')
+        //   .map(response => response.json());
         return this.http.get('/app/savedlist')
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getSavedListById = function (index) {
+        // return this.http.get( 'http://localhost:8080/app/savedlist/' + index)
+        //   .map(response => response.json());
         return this.http.get('/app/savedlist/' + index)
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getRestaurantById = function (index) {
+        // return this.http.get( 'http://localhost:8080/app/restaurant/' + index)
+        //   .map(response => response.json());
         return this.http.get('/app/restaurant/' + index)
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getAllRestaurants = function () {
+        // return this.http.get( 'http://localhost:8080/app/restaurant/')
+        //   .map(response => response.json());
         return this.http.get('/app/restaurant/')
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getAllUsers = function () {
+        // return this.http.get( 'http://localhost:8080/app/user')
+        //   .map(response => response.json());
         return this.http.get('/app/user')
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getUserById = function (index) {
+        // return this.http.get( 'http://localhost:8080/app/user/' + index)
+        //   .map(response => response.json());
         return this.http.get('/app/user/' + index)
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.saveSavedList = function (savedList) {
+        // return this.http.put('http://localhost:8080/app/savedlist/', savedList)
+        //   .map(response => response.json());
         return this.http.put('/app/savedlist/', savedList)
-            .map(function (response) { return response.json(); });
-    };
-    rrService.prototype.callGMapsGeocode = function (lat, long) {
-        return this.http.get(this.gMapsApiURL + '?latlng=' + lat + ',' + long + '&sensor=true')
             .map(function (response) { return response.json(); });
     };
     rrService = __decorate([
@@ -405,7 +381,7 @@ var rrService = (function () {
     return rrService;
     var _a;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/rr-service.service.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/rr-service.service.js.map
 
 /***/ }),
 
@@ -419,7 +395,7 @@ module.exports = ""
 /***/ "./src/app/savedlist/savedlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\n    <div class=\"panel-default\">\n      <h3>Saved Lists for User {{userId}}</h3>\n    </div>\n    <br>\n    <div>\n      <sl-item [inputList]=\"favorites\" [headingName]=\"'Favorites'\"></sl-item>\n      <sl-item [inputList]=\"blocked\" [headingName]=\"'Blocked'\"></sl-item>\n      <sl-item [inputList]=\"history\" [headingName]=\"'History'\"></sl-item>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>Saved Lists for User {{userId}}</h3>\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <sl-item [inputList]=\"favorites\" [headingName]=\"'Favorites'\"></sl-item>\r\n      <sl-item [inputList]=\"blocked\" [headingName]=\"'Blocked'\"></sl-item>\r\n      <sl-item [inputList]=\"history\" [headingName]=\"'History'\"></sl-item>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -449,9 +425,7 @@ var SavedlistComponent = (function () {
         this.route = route;
         this.userId = route.snapshot.params['id'];
         service.getSavedListById(this.userId)
-            .subscribe(function (result) { return _this.savedList = result; }, function () {
-            console.log('GET SavedList call ERROR');
-        }, function () {
+            .subscribe(function (result) { return _this.savedList = result; }, function () { console.log('GET SavedList call ERROR'); }, function () {
             console.log('GET SavedList call OK User Id:' + _this.savedList.userId);
             _this.blocked = _this.savedList.blocked;
             _this.favorites = _this.savedList.favorites;
@@ -471,7 +445,7 @@ var SavedlistComponent = (function () {
     return SavedlistComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/savedlist.component.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/savedlist.component.js.map
 
 /***/ }),
 
@@ -520,7 +494,7 @@ var SlItemComponent = (function () {
     ], SlItemComponent);
     return SlItemComponent;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/sl-item.component.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/sl-item.component.js.map
 
 /***/ }),
 
@@ -569,7 +543,7 @@ var SearchBarComponent = (function () {
     ], SearchBarComponent);
     return SearchBarComponent;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/search-bar.component.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/search-bar.component.js.map
 
 /***/ }),
 
@@ -634,7 +608,7 @@ var UserComponent = (function () {
     return UserComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/user.component.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/user.component.js.map
 
 /***/ }),
 
@@ -683,7 +657,7 @@ var WelcomeComponent = (function () {
     ], WelcomeComponent);
     return WelcomeComponent;
 }());
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/welcome.component.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/welcome.component.js.map
 
 /***/ }),
 
@@ -699,7 +673,7 @@ var WelcomeComponent = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/environment.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/environment.js.map
 
 /***/ }),
 
@@ -722,7 +696,7 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["_28" /* enableProdMode */])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/main.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/main.js.map
 
 /***/ }),
 
@@ -778,7 +752,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* pl
 
 
 
-//# sourceMappingURL=C:/Users/Scuid/workspace/CPSC4240-5240-SaaS-RRAngular/angular2/src/polyfills.js.map
+//# sourceMappingURL=C:/Users/wunat/GitHub/CPSC4240-5240-SaaS-RRAngular/angular2/src/polyfills.js.map
 
 /***/ }),
 
