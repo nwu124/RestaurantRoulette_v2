@@ -102,6 +102,17 @@ class App {
             this.idGenerator++;
         });
 
+        router.put('/app/savedlist/:userId', (req, res) => {
+            var id = req.params.userId;
+            console.log(req.body);
+            var jsonObj = req.body;
+            this.SavedLists.model.findOneAndUpdate({userId: id}, jsonObj, (err) => {
+                if (err) {
+                    res.send('SavedList object update failed for id: ' + id);
+                }
+            });
+            res.send('SavedList updated for id: ' + id);
+        });
 
         //****************************************
         //RESTAURANTS

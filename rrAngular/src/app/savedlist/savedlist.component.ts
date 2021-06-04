@@ -14,6 +14,7 @@ export class SavedlistComponent implements OnInit {
   favorites: [{ restaurantId: number }];
   history: [{ restaurantId: number }];
   private userId: string;
+  serviceVariable: rrService;
 
   constructor(private route: ActivatedRoute, service: rrService) {
     this.userId = route.snapshot.params['id'];
@@ -26,6 +27,24 @@ export class SavedlistComponent implements OnInit {
         },
         () => {
           console.log('GET SavedList call OK User Id:' + this.savedList.userId);
+          this.blocked = this.savedList.blocked;
+          this.favorites = this.savedList.favorites;
+          this.history = this.savedList.history;
+        }
+      );
+  }
+
+  updateSavedList() {
+    this.savedList.favorites.push({restaurantId: 99999});
+
+    this.serviceVariable.saveSavedList(this.userId, this.savedList)
+      .subscribe(
+        result => this.savedList = result,
+        () => {
+          console.log('PUT SavedList call ERROR');
+        },
+        () => {
+          console.log('PUT SavedList call OK User Id:' + this.savedList.userId);
           this.blocked = this.savedList.blocked;
           this.favorites = this.savedList.favorites;
           this.history = this.savedList.history;

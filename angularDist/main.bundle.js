@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\r\n    <div class=\"container-fluid\">\r\n        <div class=\"navbar-header\">\r\n        <a class=\"navbar-brand\" href=\"javascript:initXHR('home')\">Restaurant Roulette</a>\r\n        </div>\r\n        <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n          <li><a class=\"dropdown-toggle\" [routerLink]=\"['/']\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Home</a></li>\r\n          <li><a class=\"dropdown-toggle\" [routerLink]=\"['/user/1']\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">User</a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n            <li><a href=\"#\">Login</a></li>\r\n        </ul>\r\n        </div><!--/.nav-collapse -->\r\n    </div><!--/.container-fluid -->\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n    <div class=\"container-fluid\">\r\n        <div class=\"navbar-header\">\r\n        <a class=\"navbar-brand\" href=\"javascript:initXHR('home')\">Restaurant Roulette</a>\r\n        </div>\r\n        <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n          <li><a [routerLink]=\"['/']\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Home</a></li>\r\n          <li><a [routerLink]=\"['user', 1]\"  class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">User</a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n\r\n            <li><a href=\"auth/google\">Login</a></li>\r\n        </ul>\r\n        </div><!--/.nav-collapse -->\r\n    </div><!--/.container-fluid -->\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -159,7 +159,7 @@ var routes = [
     { path: 'user/:id', component: __WEBPACK_IMPORTED_MODULE_4__user_user_component__["a" /* UserComponent */] },
     { path: 'savedlist/:id', component: __WEBPACK_IMPORTED_MODULE_5__savedlist_savedlist_component__["a" /* SavedlistComponent */] }
 ];
-var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forRoot(routes);
+var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forRoot(routes, { useHash: true });
 
 
 /***/ }),
@@ -174,7 +174,7 @@ module.exports = ""
 /***/ "./src/app/restaurant-list/restaurant-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>Restaurant List</h3>\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Roulette</th>\r\n          <th width=\"5%\"></th>\r\n          <th width=\"5%\">Name</th>\r\n          <th width=\"5%\">ID</th>\r\n          <th width=\"5%\"></th>\r\n          <th width=\"5%\"></th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td><a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"pickRestaurant()\">Pick A Restaurant</a></td>\r\n          <td></td>\r\n          <td><textarea [(ngModel)]=\"restaurantIdDispName\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"restaurantIdDispId\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"longDisp\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"latDisp\" disabled=\"true\"></textarea></td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Restaurant</th>\r\n          <th width=\"5%\">City</th>\r\n          <th width=\"5%\">State</th>\r\n          <th width=\"5%\">Zip</th>\r\n          <th width=\"5%\">Price</th>\r\n          <th width=\"5%\">URL</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let restaurant of restaurantList\">\r\n          <td><a [routerLink]=\"['/restaurant/', restaurant.restaurantId]\">{{restaurant.name}}</a></td>\r\n          <td>{{restaurant.locationCity}}</td>\r\n          <td>{{restaurant.locationState}}</td>\r\n          <td>{{restaurant.locationZip}}</td>\r\n          <td>{{restaurant.price}}</td>\r\n          <td><a href=\"{{restaurant.url}}\">{{restaurant.url}}</a></td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>Restaurant List</h3>\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Restaurant</th>\r\n          <th width=\"5%\">City</th>\r\n          <th width=\"5%\">State</th>\r\n          <th width=\"5%\">Zip</th>\r\n          <th width=\"5%\">Price</th>\r\n          <th width=\"5%\">URL</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let restaurant of restaurantList\">\r\n          <td><a [routerLink]=\"['/restaurant/', restaurant.restaurantId]\">{{restaurant.name}}</a></td>\r\n          <td>{{restaurant.locationCity}}</td>\r\n          <td>{{restaurant.locationState}}</td>\r\n          <td>{{restaurant.locationZip}}</td>\r\n          <td>{{restaurant.price}}</td>\r\n          <td><a href=\"{{restaurant.url}}\">{{restaurant.url}}</a></td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Roulette</th>\r\n          <th width=\"5%\"></th>\r\n          <th width=\"5%\">Name</th>\r\n          <th width=\"5%\">ID</th>\r\n          <th width=\"5%\"></th>\r\n          <th width=\"5%\"></th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td><a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"pickRestaurant()\">Pick A Restaurant</a></td>\r\n          <td></td>\r\n          <td><textarea [(ngModel)]=\"restaurantIdDispName\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"restaurantIdDispId\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"longDisp\" disabled=\"true\"></textarea></td>\r\n          <td><textarea [(ngModel)]=\"latDisp\" disabled=\"true\"></textarea></td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -272,7 +272,7 @@ module.exports = ""
 /***/ "./src/app/restaurant/restaurant.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>Restaurant Details for <b>{{name}}</b></h3>\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Restaurant</th>\r\n          <th width=\"5%\">City</th>\r\n          <th width=\"5%\">State</th>\r\n          <th width=\"5%\">Zip</th>\r\n          <th width=\"5%\">Price</th>\r\n          <th width=\"5%\">URL</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td><a href=\"{{url}}\">{{name}}</a></td>\r\n          <td>{{locationCity}}</td>\r\n          <td>{{locationState}}</td>\r\n          <td>{{locationZip}}</td>\r\n          <td>{{price}}</td>\r\n          <td><a href=\"{{url}}\">{{url}}</a></td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Reviews</th>\r\n          <th width=\"10%\">Source</th>\r\n          <th width=\"35%\">Description</th>\r\n          <th width=\"5%\">Rating</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let result of reviews; let i = index\">\r\n          <td>{{i + 1}}.</td><td> {{result.source}}</td>\r\n          <td>{{result.description}}</td>\r\n          <td>{{result.rating}}</td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th>Feedback</th>\r\n          <th width=\"10%\">User ID</th>\r\n          <th width=\"35%\">Comment</th>\r\n          <th width=\"5%\">Rating</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr *ngFor=\"let result of feedback; let i = index\">\r\n          <td>{{i + 1}}.</td><td> <a [routerLink]=\"['/user/', result.userID]\">{{result.userID}}</a></td>\r\n          <td>{{result.comment}}</td>\r\n          <td>{{result.rating}}</td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <img src=\"https://thumbs.dreamstime.com/b/drawing-sidewalk-cafe-restaurant-tables-chairs-standing-city-street-antique-building-drawing-106390689.jpg\"\r\n       alt=\"Nature\" class= \"opaque\" width=\"1000\" height=\"350\">\r\n    <p class=\"overlayname\"><b>{{name}}</b></p>\r\n    <p class=\"overlayprice\">Price: {{price}}</p>\r\n    <p class=\"overlaytags\">{{tags}}</p>\r\n    <p class =\"overlaylocation\">{{locationCity}} {{locationState}} {{locationZip}} </p>\r\n  <p class =\"overlayurl\"><a href=\"{{url}}\">{{url}}</a></p>\r\n</div>\r\n\r\n<h1 class=\"tnr\"><br>External Reviews</h1>\r\n<table id=\"reviews\">\r\n<tr>\r\n  <th>Source</th>\r\n  <th>Rating</th>\r\n  <th>Review</th>\r\n</tr>\r\n  <tr *ngFor=\"let result of reviews; let i = index\">\r\n    <td> {{result.source}}</td>\r\n    <td>{{result.rating}}</td>\r\n    <td>{{result.description}}</td>\r\n  </tr>\r\n</table>\r\n\r\n\r\n<h1 class=\"tnr\"><br>User Feedback</h1>\r\n<table id=\"reviews\">\r\n  <tr>\r\n    <th>User ID</th>\r\n    <th>Rating</th>\r\n    <th>Review</th>\r\n  </tr>\r\n  <tr *ngFor=\"let result of feedback; let i = index\">\r\n    <td> <a [routerLink]=\"['/user/', result.userID]\">{{result.userID}}</a></td>\r\n    <td>{{result.rating}}</td>\r\n    <td>{{result.comment}}</td>\r\n  </tr>\r\n</table>\r\n"
 
 /***/ }),
 
@@ -356,36 +356,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var rrService = /** @class */ (function () {
     function rrService(http) {
         this.http = http;
-        this.port = 8080;
+        this.localPort = 8080;
         this.expressHost = 'localhost';
         this.gMapsApiURL = 'http://maps.googleapis.com/maps/api/geocode/json';
     }
+    /**
+     * Prepend URL with localhost if not on Azure
+     */
+    rrService.prototype.getPrepend = function () {
+        var hostname = window.location.hostname;
+        if (hostname.includes('azure')) {
+            return "";
+        }
+        //Assume running locally mongoose server uses local port
+        return "http://" + this.expressHost + ":" + this.localPort;
+    };
     rrService.prototype.getAllSavedLists = function () {
-        return this.http.get('/app/savedlist')
+        return this.http.get(this.getPrepend() + '/app/savedlist')
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getSavedListById = function (index) {
-        return this.http.get('/app/savedlist/' + index)
+        return this.http.get(this.getPrepend() + '/app/savedlist/' + index)
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getRestaurantById = function (index) {
-        return this.http.get('/app/restaurant/' + index)
+        return this.http.get(this.getPrepend() + '/app/restaurant/' + index)
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getAllRestaurants = function () {
-        return this.http.get('/app/restaurant/')
+        return this.http.get(this.getPrepend() + '/app/restaurant/')
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getAllUsers = function () {
-        return this.http.get('/app/user')
+        return this.http.get(this.getPrepend() + '/app/user')
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.getUserById = function (index) {
-        return this.http.get('/app/user/' + index)
+        return this.http.get(this.getPrepend() + '/app/user/' + index)
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.saveSavedList = function (savedList) {
-        return this.http.put('/app/savedlist/', savedList)
+        return this.http.put(this.getPrepend() + '/app/savedlist/', savedList)
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.callGMapsGeocode = function (lat, long) {
@@ -413,7 +424,7 @@ module.exports = ""
 /***/ "./src/app/savedlist/savedlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>Saved Lists for User {{userId}}</h3>\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <sl-item [inputList]=\"favorites\" [headingName]=\"'Favorites'\"></sl-item>\r\n      <sl-item [inputList]=\"blocked\" [headingName]=\"'Blocked'\"></sl-item>\r\n      <sl-item [inputList]=\"history\" [headingName]=\"'History'\"></sl-item>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -579,7 +590,7 @@ module.exports = ""
 /***/ "./src/app/user/user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>User Details for {{username}}</h3>\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th width=\"5%\">Password</th>\r\n          <th width=\"15%\">Login Status</th>\r\n          <th width=\"15%\">Last Login</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td>{{password}}</td>\r\n          <td>{{loginStatus}}</td>\r\n          <td>{{lastLogin}}</td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<app-savedlist></app-savedlist>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>{{username}}</h3>\r\n      <img src=\"https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png\" width=\"100\" height=\"100\">\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th width=\"5%\">Password</th>\r\n          <th width=\"15%\">Login Status</th>\r\n          <th width=\"15%\">Last Login</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td>{{password}}</td>\r\n          <td>{{loginStatus}}</td>\r\n          <td>{{lastLogin}}</td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<app-savedlist></app-savedlist>\r\n"
 
 /***/ }),
 
