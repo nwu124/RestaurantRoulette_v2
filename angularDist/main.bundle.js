@@ -395,8 +395,8 @@ var rrService = /** @class */ (function () {
         return this.http.get(this.getPrepend() + '/app/user/' + index)
             .map(function (response) { return response.json(); });
     };
-    rrService.prototype.saveSavedList = function (savedList) {
-        return this.http.put(this.getPrepend() + '/app/savedlist/', savedList)
+    rrService.prototype.saveSavedList = function (index, savedList) {
+        return this.http.put(this.getPrepend() + '/app/savedlist/' + index, savedList)
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.callGMapsGeocode = function (lat, long) {
@@ -424,7 +424,7 @@ module.exports = ""
 /***/ "./src/app/savedlist/savedlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
+module.exports = "<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateSavedList()\">Add a favorite</a>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -463,6 +463,19 @@ var SavedlistComponent = /** @class */ (function () {
             _this.history = _this.savedList.history;
         });
     }
+    SavedlistComponent.prototype.updateSavedList = function () {
+        var _this = this;
+        this.savedList.favorites.push({ restaurantId: 99999 });
+        this.serviceVariable.saveSavedList(this.userId, this.savedList)
+            .subscribe(function (result) { return _this.savedList = result; }, function () {
+            console.log('PUT SavedList call ERROR');
+        }, function () {
+            console.log('PUT SavedList call OK User Id:' + _this.savedList.userId);
+            _this.blocked = _this.savedList.blocked;
+            _this.favorites = _this.savedList.favorites;
+            _this.history = _this.savedList.history;
+        });
+    };
     SavedlistComponent.prototype.ngOnInit = function () {
     };
     SavedlistComponent = __decorate([
