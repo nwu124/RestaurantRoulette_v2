@@ -14,12 +14,16 @@
     "body-parser": "^1.17.1",
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
+    "cookie-parser": "^1.4.5",
     "debug": "^2.6.3",
     "express": "^4.15.2",
+    "express-session": "^1.17.2",
     "mocha": "^8.4.0",
     "mongodb": "^2.2.25",
     "mongoose": "^5.0.17",
     "morgan": "^1.8.1",
+    "passport": "^0.4.1",
+    "passport-google-oauth20-with-people-api": "^2.0.0",
     "path": "^0.12.7",
     "q": "^1.5.1",
     "typescript": "^2.2.2",
@@ -27,7 +31,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node AppServer.js"
+    "start": "node AppServer.js",
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC"

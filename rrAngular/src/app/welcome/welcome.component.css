@@ -1,0 +1,14 @@
+.bg-1 {
+  background-color: #355e3b; /*Hunter Green */
+  color: #ffffff;
+}
+
+.container-fluid {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+img {
+  border-radius: 50%;
+}

@@ -40,6 +40,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+rrAngular/node_modules
+rrAngular/dist
 
 # TypeScript v1 declaration files
 typings/

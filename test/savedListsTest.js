@@ -9,9 +9,11 @@ var should = chai.should();
 var http = require('http');
 chai.use(chaiHttp);
 
+var url = 'https://rrwebappsu.azurewebsites.net';
+
 before(function (done) {
   // fetch single SavedList
-  chai.request("http://localhost:8080")
+  chai.request(url)
     .get("/app/savedlist/1")
     .end(function (err, res) {
       singleSavedListResponse = res;
@@ -20,7 +22,7 @@ before(function (done) {
     });
 
   // fetch all SavedLists
-  chai.request("http://localhost:8080")
+  chai.request(url)
     .get("/app/savedlist")
     .end(function (err, res) {
       listSavedListResponse = res;
@@ -30,7 +32,7 @@ before(function (done) {
 
   setTimeout(function(){
     done();
-  },1000)
+  },1500)
 });
 
 describe('SavedList Tests', function() {

@@ -1,0 +1,38 @@
+<div class="container">
+  <img src="https://thumbs.dreamstime.com/b/drawing-sidewalk-cafe-restaurant-tables-chairs-standing-city-street-antique-building-drawing-106390689.jpg"
+       alt="Nature" class= "opaque" width="1000" height="350">
+    <p class="overlayname"><b>{{name}}</b></p>
+    <p class="overlayprice">Price: {{price}}</p>
+    <p class="overlaytags">{{tags}}</p>
+    <p class ="overlaylocation">{{locationCity}} {{locationState}} {{locationZip}} </p>
+  <p class ="overlayurl"><a href="{{url}}">{{url}}</a></p>
+</div>
+
+<h1 class="tnr"><br>External Reviews</h1>
+<table id="reviews">
+<tr>
+  <th>Source</th>
+  <th>Rating</th>
+  <th>Review</th>
+</tr>
+  <tr *ngFor="let result of reviews; let i = index">
+    <td> {{result.source}}</td>
+    <td>{{result.rating}}</td>
+    <td>{{result.description}}</td>
+  </tr>
+</table>
+
+
+<h1 class="tnr"><br>User Feedback</h1>
+<table id="reviews">
+  <tr>
+    <th>User ID</th>
+    <th>Rating</th>
+    <th>Review</th>
+  </tr>
+  <tr *ngFor="let result of feedback; let i = index">
+    <td> <a [routerLink]="['/user/', result.userID]">{{result.userID}}</a></td>
+    <td>{{result.rating}}</td>
+    <td>{{result.comment}}</td>
+  </tr>
+</table>

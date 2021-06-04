@@ -1,9 +1,14 @@
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
+import * as session from 'express-session';
+import * as cookieParser from 'cookie-parser';
 import {userModel} from "./model/UserModel";
 import {restaurantModel} from "./model/RestaurantModel";
 import {savedListModel} from "./model/SavedListModel";
+
+import GooglePassportObj from './GooglePassport';
+import * as passport from 'passport';
 
 class App {
 
@@ -12,8 +17,11 @@ class App {
     public Restaurants: restaurantModel;
     public SavedLists: savedListModel;
     public idGenerator: number;
+    public googlePassportObj:GooglePassportObj;
 
     constructor() {
+        this.googlePassportObj = new GooglePassportObj();
+
         this.expressApp = express();
         this.middleware();
         this.routes();
@@ -27,6 +35,16 @@ class App {
         this.expressApp.use(logger('dev'));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({extended: false}));
+        this.expressApp.use(session({ secret: 'mi1Oo19jV4hrYUilwxV55q0I' }));
+        this.expressApp.use(cookieParser());
+        this.expressApp.use(passport.initialize());
+        this.expressApp.use(passport.session());
+    }
+
+    private validateAuth(req, res, next):void {
+        if (req.isAuthenticated()) { console.log("user is authenticated"); return next(); }
+        console.log("user is not authenticated");
+        res.redirect('/');
     }
 
     private routes(): void {
@@ -39,9 +57,25 @@ class App {
             next();
         });
 
-        // this.expressApp.use('/', router);
-        // this.expressApp.use('/json', expressApp.static(__dirname+'/json'));
+        this.expressApp.use('/', router);
+        this.expressApp.use('/images', express.static(__dirname + '/img'));
+        this.expressApp.use('/', express.static(__dirname + '/angularDist'));
+        console.log("__dirname: " + __dirname);
 
+        router.get('/auth/google',
+            passport.authenticate('google', {scope: ['profile', 'email']}));
+
+
+        router.get('/auth/google/callback',
+            passport.authenticate('google',
+                { failureRedirect: '/' }
+            ),
+            (req, res) => {
+                console.log("successfully authenticated user and returned to callback page.");
+                console.log("redirecting to /#/restaurant");
+                res.redirect('/#/restaurant');
+            }
+        );
         //****************************************
         //SAVED LISTS
         router.get('/app/savedlist/', (req, res) => {
@@ -108,10 +142,7 @@ class App {
             this.idGenerator++;
         });
 
-        this.expressApp.use('/', router);
-        this.expressApp.use('/images', express.static(__dirname + '/img'));
-        this.expressApp.use('/', express.static(__dirname + '/angularDist'));
-        console.log("__dirname: " + __dirname);
+
     }
 }
 

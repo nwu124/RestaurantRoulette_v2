@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="panel panel-default" style="border-width: 0px; border-style:solid">
+    <div class="panel-default">
+      <h3>Restaurant List</h3>
+    </div>
+    <br>
+    <div>
+      <table class="table" style="font-size:10pt;">
+        <thead>
+        <tr>
+          <th>Restaurant</th>
+          <th width="5%">City</th>
+          <th width="5%">State</th>
+          <th width="5%">Zip</th>
+          <th width="5%">Price</th>
+          <th width="5%">URL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let restaurant of restaurantList">
+          <td><a [routerLink]="['/restaurant/', restaurant.restaurantId]">{{restaurant.name}}</a></td>
+          <td>{{restaurant.locationCity}}</td>
+          <td>{{restaurant.locationState}}</td>
+          <td>{{restaurant.locationZip}}</td>
+          <td>{{restaurant.price}}</td>
+          <td><a href="{{restaurant.url}}">{{restaurant.url}}</a></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table class="table" style="font-size:10pt;">
+        <thead>
+        <tr>
+          <th>Roulette</th>
+          <th width="5%"></th>
+          <th width="5%">Name</th>
+          <th width="5%">ID</th>
+          <th width="5%"></th>
+          <th width="5%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><a class="btn btn-lg btn-primary" role="button" (click)="pickRestaurant()">Pick A Restaurant</a></td>
+          <td></td>
+          <td><textarea [(ngModel)]="restaurantIdDispName" disabled="true"></textarea></td>
+          <td><textarea [(ngModel)]="restaurantIdDispId" disabled="true"></textarea></td>
+          <td><textarea [(ngModel)]="longDisp" disabled="true"></textarea></td>
+          <td><textarea [(ngModel)]="latDisp" disabled="true"></textarea></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

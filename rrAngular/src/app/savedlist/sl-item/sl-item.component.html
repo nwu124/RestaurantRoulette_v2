@@ -1,0 +1,13 @@
+<table class="table" style="font-size:10pt;">
+  <thead>
+  <tr>
+    <th width="5%">{{headingName}}</th>
+    <th >Restaurant Id</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let result of inputList; let i = index">
+    <td>{{i + 1}}.</td><td> <a [routerLink]="['/restaurant/', result.restaurantId]">{{result.restaurantId}}</a></td>
+  </tr>
+  </tbody>
+</table>

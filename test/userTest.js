@@ -9,9 +9,11 @@ var should = chai.should();
 var http = require('http');
 chai.use(chaiHttp);
 
+var url = 'https://rrwebappsu.azurewebsites.net';
+
 before(function (done) {
   // fetch single user
-  chai.request("http://localhost:8080")
+  chai.request(url)
     .get("/app/user/1")
     .end(function (err, res) {
       singleUserResponse = res;
@@ -20,7 +22,7 @@ before(function (done) {
     });
 
   // fetch all users
-  chai.request("http://localhost:8080")
+  chai.request(url)
     .get("/app/user")
     .end(function (err, res) {
       listUserResponse = res;
@@ -30,7 +32,7 @@ before(function (done) {
 
   setTimeout(function(){
     done();
-  },1000)
+  },1500)
 });
 
 describe('User Tests', function() {

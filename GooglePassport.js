@@ -9,10 +9,15 @@ var GooglePassport = /** @class */ (function () {
     function GooglePassport() {
         this.clientId = googleOauth2_1["default"].id;
         this.secretId = googleOauth2_1["default"].secret;
+        this.isAzure = process.env.HOST ? true : false;
+        // this.host = this.isAzure ? process.env.HOST : "localhost";
+        // this.port = this.isAzure ? process.env.PORT : 8080
+        this.callbackPrepend = this.isAzure ?
+            "https://rrwebappsu.azurewebsites.net" : "http://localhost:8080";
         passport.use(new GoogleStrategy({
             clientID: this.clientId,
             clientSecret: this.secretId,
-            callbackURL: "/auth/google/callback"
+            callbackURL: this.callbackPrepend + "/auth/google/callback"
             //                profileFields: ['id', 'displayName', 'emails']
         }, function (accessToken, refreshToken, profile, done) {
             console.log("inside new password google strategy");
