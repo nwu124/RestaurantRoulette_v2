@@ -424,7 +424,7 @@ module.exports = ""
 /***/ "./src/app/savedlist/savedlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<form>\r\n  <label for=\"favorite\">New Favorite:</label><br>\r\n  <input type=\"text\" id=\"favorite\" name=\"favorite\"><br>\r\n  <label for=\"blocked\">New Blocked:</label><br>\r\n  <input type=\"text\" id=\"blocked\" name=\"blocked\">\r\n</form>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateFavorite()\">Add a favorite restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateBlocked()\">Add a blocked restaurant</a>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
+module.exports = "\r\n<form>\r\n  <label for=\"favorite\">New Favorite:</label><br>\r\n  <input type=\"text\" id=\"favoriteInput\"><br>\r\n  <label for=\"blocked\">New Blocked:</label><br>\r\n  <input type=\"text\" id=\"blockedInput\">\r\n</form>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateFavorite()\">Add a favorite restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateBlocked()\">Add a blocked restaurant</a>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -453,6 +453,7 @@ var SavedlistComponent = /** @class */ (function () {
         var _this = this;
         this.route = route;
         this.userId = route.snapshot.params['id'];
+        this.serviceVariable = service;
         service.getSavedListById(this.userId)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('GET SavedList call ERROR');
@@ -465,7 +466,7 @@ var SavedlistComponent = /** @class */ (function () {
     }
     SavedlistComponent.prototype.updateFavorite = function () {
         var _this = this;
-        var newFavorite = parseInt(document.getElementById("favorite").innerHTML);
+        var newFavorite = parseInt(document.getElementById("favoriteInput").innerHTML);
         this.savedList.favorites.push({ restaurantId: newFavorite });
         this.serviceVariable.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
@@ -479,7 +480,7 @@ var SavedlistComponent = /** @class */ (function () {
     };
     SavedlistComponent.prototype.updateBlocked = function () {
         var _this = this;
-        var newBlocked = parseInt(document.getElementById("blocked").innerHTML);
+        var newBlocked = parseInt(document.getElementById("blockedInput").innerHTML);
         this.savedList.blocked.push({ restaurantId: newBlocked });
         this.serviceVariable.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
