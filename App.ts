@@ -102,7 +102,7 @@ class App {
             this.idGenerator++;
         });
 
-        router.put('/app/savedlist/:userId', (req, res) => {
+        router.put('/app/savedlist/update/:userId', (req, res) => {
             var id = req.params.userId;
             console.log(req.body);
             var jsonObj = req.body;
