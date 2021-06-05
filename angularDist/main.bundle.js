@@ -396,7 +396,7 @@ var rrService = /** @class */ (function () {
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.saveSavedList = function (index, savedList) {
-        return this.http.put(this.getPrepend() + '/app/savedlist/' + index, savedList)
+        return this.http.put(this.getPrepend() + '/app/savedlist/' + index, JSON.stringify(savedList))
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.callGMapsGeocode = function (lat, long) {
