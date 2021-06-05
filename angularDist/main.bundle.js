@@ -484,7 +484,9 @@ var SavedlistComponent = /** @class */ (function () {
         var index = this.savedList.favorites.indexOf({ restaurantId: +removeFavorite });
         if (index !== -1) {
             this.savedList.favorites.splice(index, 1);
+            console.log('spliced');
         }
+        this.savedList.favorites.splice(0, 1);
         this.localService.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('PUT SavedList call ERROR');
