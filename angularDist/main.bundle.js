@@ -462,20 +462,11 @@ var SavedlistComponent = /** @class */ (function () {
             _this.blocked = _this.savedList.blocked;
             _this.favorites = _this.savedList.favorites;
             _this.history = _this.savedList.history;
-            service.saveSavedList(_this.userId, _this.savedList)
-                .subscribe(function (result) { return _this.savedList = result; }, function () {
-                console.log('PUT SavedList call ERROR');
-            }, function () {
-                console.log('PUT SavedList call OK User Id:' + _this.savedList.userId);
-                _this.blocked = _this.savedList.blocked;
-                _this.favorites = _this.savedList.favorites;
-                _this.history = _this.savedList.history;
-            });
         });
     }
     SavedlistComponent.prototype.updateFavorite = function () {
         var _this = this;
-        var newFavorite = document.getElementById("favoriteInput").innerHTML;
+        var newFavorite = document.getElementById("favoriteInput").value;
         this.savedList.favorites.push({ restaurantId: +newFavorite });
         this.localService.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
