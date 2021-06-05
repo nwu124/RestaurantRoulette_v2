@@ -396,7 +396,7 @@ var rrService = /** @class */ (function () {
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.saveSavedList = function (index, savedList) {
-        return this.http.put(this.getPrepend() + '/app/savedlist/' + index, JSON.stringify(savedList))
+        return this.http.put(this.getPrepend() + '/app/savedlist/' + index, JSON.parse(JSON.stringify(savedList)))
             .map(function (response) { return response.json(); });
     };
     rrService.prototype.callGMapsGeocode = function (lat, long) {
@@ -424,7 +424,7 @@ module.exports = ""
 /***/ "./src/app/savedlist/savedlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<form>\r\n  <label for=\"favorite\">New Favorite:</label><br>\r\n  <input type=\"text\" id=\"favoriteInput\"><br>\r\n  <label for=\"blocked\">New Blocked:</label><br>\r\n  <input type=\"text\" id=\"blockedInput\">\r\n</form>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateFavorite()\">Add a favorite restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateBlocked()\">Add a blocked restaurant</a>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
+module.exports = "\r\n<form>\r\n  <label for=\"favorite\">New Favorite:</label><br>\r\n  <input type=\"number\" id=\"favoriteInput\"><br>\r\n  <label for=\"blocked\">New Blocked:</label><br>\r\n  <input type=\"number\" id=\"blockedInput\">\r\n</form>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateFavorite()\">Add a favorite restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateBlocked()\">Add a blocked restaurant</a>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -465,8 +465,8 @@ var SavedlistComponent = /** @class */ (function () {
     }
     SavedlistComponent.prototype.updateFavorite = function (service) {
         var _this = this;
-        var newFavorite = parseInt(document.getElementById("favoriteInput").innerHTML);
-        this.savedList.favorites.push({ restaurantId: 1111111111 });
+        var newFavorite = document.getElementById("favoriteInput").innerHTML;
+        this.savedList.favorites.push({ restaurantId: +newFavorite });
         service.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('PUT SavedList call ERROR');
