@@ -453,6 +453,7 @@ var SavedlistComponent = /** @class */ (function () {
         var _this = this;
         this.route = route;
         this.userId = route.snapshot.params['id'];
+        this.localService = service;
         service.getSavedListById(this.userId)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('GET SavedList call ERROR');
@@ -463,11 +464,11 @@ var SavedlistComponent = /** @class */ (function () {
             _this.history = _this.savedList.history;
         });
     }
-    SavedlistComponent.prototype.updateFavorite = function (service) {
+    SavedlistComponent.prototype.updateFavorite = function () {
         var _this = this;
         var newFavorite = document.getElementById("favoriteInput").innerHTML;
         this.savedList.favorites.push({ restaurantId: +newFavorite });
-        service.saveSavedList(this.userId, this.savedList)
+        this.localService.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('PUT SavedList call ERROR');
         }, function () {
@@ -477,11 +478,11 @@ var SavedlistComponent = /** @class */ (function () {
             _this.history = _this.savedList.history;
         });
     };
-    SavedlistComponent.prototype.updateBlocked = function (service) {
+    SavedlistComponent.prototype.updateBlocked = function () {
         var _this = this;
         var newBlocked = parseInt(document.getElementById("blockedInput").innerHTML);
         this.savedList.blocked.push({ restaurantId: 2222222222 });
-        service.saveSavedList(this.userId, this.savedList)
+        this.localService.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('PUT SavedList call ERROR');
         }, function () {
@@ -497,7 +498,7 @@ var SavedlistComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-savedlist',
             template: __webpack_require__("./src/app/savedlist/savedlist.component.html"),
-            styles: [__webpack_require__("./src/app/savedlist/savedlist.component.css")]
+            styles: [__webpack_require__("./src/app/savedlist/savedlist.component.css")],
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */], __WEBPACK_IMPORTED_MODULE_1__rr_service_service__["a" /* rrService */]])
     ], SavedlistComponent);
