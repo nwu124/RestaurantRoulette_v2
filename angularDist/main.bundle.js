@@ -453,7 +453,6 @@ var SavedlistComponent = /** @class */ (function () {
         var _this = this;
         this.route = route;
         this.userId = route.snapshot.params['id'];
-        this.serviceVariable = service;
         service.getSavedListById(this.userId)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('GET SavedList call ERROR');
@@ -464,11 +463,11 @@ var SavedlistComponent = /** @class */ (function () {
             _this.history = _this.savedList.history;
         });
     }
-    SavedlistComponent.prototype.updateFavorite = function () {
+    SavedlistComponent.prototype.updateFavorite = function (service) {
         var _this = this;
         var newFavorite = parseInt(document.getElementById("favoriteInput").innerHTML);
-        this.savedList.favorites.push({ restaurantId: newFavorite });
-        this.serviceVariable.saveSavedList(this.userId, this.savedList)
+        this.savedList.favorites.push({ restaurantId: 1111111111 });
+        service.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('PUT SavedList call ERROR');
         }, function () {
@@ -478,11 +477,11 @@ var SavedlistComponent = /** @class */ (function () {
             _this.history = _this.savedList.history;
         });
     };
-    SavedlistComponent.prototype.updateBlocked = function () {
+    SavedlistComponent.prototype.updateBlocked = function (service) {
         var _this = this;
         var newBlocked = parseInt(document.getElementById("blockedInput").innerHTML);
-        this.savedList.blocked.push({ restaurantId: newBlocked });
-        this.serviceVariable.saveSavedList(this.userId, this.savedList)
+        this.savedList.blocked.push({ restaurantId: 2222222222 });
+        service.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('PUT SavedList call ERROR');
         }, function () {
