@@ -80,6 +80,17 @@ var App = /** @class */ (function () {
             res.send(_this.idGenerator.toString());
             _this.idGenerator++;
         });
+        router.put('/app/savedlist/update/:userId', function (req, res) {
+            var id = req.params.userId;
+            console.log(req.body);
+            var jsonObj = req.body;
+            _this.SavedLists.model.findOneAndUpdate({ userId: id }, jsonObj, function (err) {
+                if (err) {
+                    res.send('SavedList object update failed for id: ' + id);
+                }
+            });
+            res.send('SavedList updated for id: ' + id);
+        });
         //****************************************
         //RESTAURANTS
         router.get('/app/restaurant/', function (req, res) {
