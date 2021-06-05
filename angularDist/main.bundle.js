@@ -424,7 +424,7 @@ module.exports = ""
 /***/ "./src/app/savedlist/savedlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<form>\r\n  <label for=\"favorite\">New Favorite:</label><br>\r\n  <input type=\"text\" id=\"favoriteInput\"><br>\r\n  <label for=\"blocked\">New Blocked:</label><br>\r\n  <input type=\"number\" id=\"blockedInput\">\r\n</form>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateFavorite()\">Add a favorite restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"updateBlocked()\">Add a blocked restaurant</a>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
+module.exports = "<label for=\"favorite\">Favorite Input:</label><br>\r\n<input type=\"text\" id=\"favoriteInput\"><br>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addFavorite()\">Add a favorite restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeFavorite()\">Remove a favorite restaurant</a>\r\n\r\n<label for=\"blocked\">Blocked Input:</label><br>\r\n<input type=\"text\" id=\"blockedInput\"><br>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addBlocked()\">Add a blocked restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeBlocked()\">Remove a blocked restaurant</a>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -464,7 +464,7 @@ var SavedlistComponent = /** @class */ (function () {
             _this.history = _this.savedList.history;
         });
     }
-    SavedlistComponent.prototype.updateFavorite = function () {
+    SavedlistComponent.prototype.addFavorite = function () {
         var _this = this;
         var newFavorite = document.getElementById("favoriteInput").value;
         this.savedList.favorites.push({ restaurantId: +newFavorite });
@@ -478,10 +478,44 @@ var SavedlistComponent = /** @class */ (function () {
             _this.history = _this.savedList.history;
         });
     };
-    SavedlistComponent.prototype.updateBlocked = function () {
+    SavedlistComponent.prototype.removeFavorite = function () {
         var _this = this;
-        var newBlocked = parseInt(document.getElementById("blockedInput").innerHTML);
-        this.savedList.blocked.push({ restaurantId: 2222222222 });
+        var removeFavorite = document.getElementById("favoriteInput").value;
+        var index = this.savedList.favorites.indexOf({ restaurantId: +removeFavorite });
+        if (index !== -1) {
+            this.savedList.favorites.splice(index, 1);
+        }
+        this.localService.saveSavedList(this.userId, this.savedList)
+            .subscribe(function (result) { return _this.savedList = result; }, function () {
+            console.log('PUT SavedList call ERROR');
+        }, function () {
+            console.log('PUT SavedList call OK User Id:' + _this.savedList.userId);
+            _this.blocked = _this.savedList.blocked;
+            _this.favorites = _this.savedList.favorites;
+            _this.history = _this.savedList.history;
+        });
+    };
+    SavedlistComponent.prototype.addBlocked = function () {
+        var _this = this;
+        var newBlocked = document.getElementById("blockedInput").value;
+        this.savedList.blocked.push({ restaurantId: +newBlocked });
+        this.localService.saveSavedList(this.userId, this.savedList)
+            .subscribe(function (result) { return _this.savedList = result; }, function () {
+            console.log('PUT SavedList call ERROR');
+        }, function () {
+            console.log('PUT SavedList call OK User Id:' + _this.savedList.userId);
+            _this.blocked = _this.savedList.blocked;
+            _this.favorites = _this.savedList.favorites;
+            _this.history = _this.savedList.history;
+        });
+    };
+    SavedlistComponent.prototype.removeBlocked = function () {
+        var _this = this;
+        var removeBlocked = document.getElementById("blockedInput").value;
+        var index = this.savedList.blocked.indexOf({ restaurantId: +removeBlocked });
+        if (index !== -1) {
+            this.savedList.blocked.splice(index, 1);
+        }
         this.localService.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
             console.log('PUT SavedList call ERROR');
