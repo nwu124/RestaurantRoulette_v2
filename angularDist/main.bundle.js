@@ -424,7 +424,7 @@ module.exports = ""
 /***/ "./src/app/savedlist/savedlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<label>Favorite Input:</label><br>\r\n<input type=\"text\" id=\"favoriteInput\"><br>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addFavorite()\">Add a favorite restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeFavorite()\">Remove a favorite restaurant</a><br>\r\n<br>\r\n\r\n<label>Blocked Input:</label><br>\r\n<input type=\"text\" id=\"blockedInput\"><br>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addBlocked()\">Add a blocked restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeBlocked()\">Remove a blocked restaurant</a><br>\r\n<br>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
+module.exports = "<div div style=\"margin-top:10px\">\r\n  <label>Favorite Input:</label><br>\r\n  <input type=\"text\" id=\"favoriteInput\"><br>\r\n  <div class=\"col-md-4\">\r\n    <a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addFavorite()\">Add a favorite restaurant</a>\r\n  </div>\r\n  <div class=\"col-md-6\">\r\n    <a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeFavorite()\">Remove a favorite restaurant</a><br>\r\n  </div>\r\n\r\n  <br>\r\n\r\n  <label>Blocked Input:</label><br>\r\n  <input type=\"text\" id=\"blockedInput\"><br>\r\n  <a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addBlocked()\">Add a blocked restaurant</a>\r\n  <a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeBlocked()\">Remove a blocked restaurant</a><br>\r\n  <br>\r\n</div>\r\n\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -653,7 +653,7 @@ module.exports = ""
 /***/ "./src/app/user/user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>{{username}}</h3>\r\n      <img src=\"https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png\" width=\"100\" height=\"100\">\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th width=\"5%\">Password</th>\r\n          <th width=\"15%\">Login Status</th>\r\n          <th width=\"15%\">Last Login</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td>{{password}}</td>\r\n          <td>{{loginStatus}}</td>\r\n          <td>{{lastLogin}}</td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<app-savedlist></app-savedlist>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>{{firstname}} {{lastname}}</h3>\r\n      <img src=\"https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png\" width=\"100\" height=\"100\">\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th width=\"20%\">Email Address</th>\r\n          <th width=\"10%\">Login Type</th>\r\n          <th width=\"20%\">Last Login</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td>{{email}}</td>\r\n          <td>{{loginType}}</td>\r\n          <td>{{lastLogin}}</td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<app-savedlist></app-savedlist>\r\n"
 
 /***/ }),
 
@@ -685,9 +685,12 @@ var UserComponent = /** @class */ (function () {
         service.getUserById(this.userId.toString())
             .subscribe(function (result) { return _this.user = result; }, function () { console.log('GET User call ERROR'); }, function () {
             console.log('GET User call OK User Id:' + _this.userId);
-            _this.username = _this.user.username;
-            _this.password = _this.user.password;
-            _this.loginStatus = _this.user.loginStatus;
+            _this.userId = _this.user.userId;
+            _this.loginType = _this.user.loginType;
+            _this.firstname = _this.user.firstname;
+            _this.lastname = _this.user.lastname;
+            _this.email = _this.user.email;
+            _this.photoUrl = _this.user.photoUrl;
             _this.lastLogin = _this.user.lastLogin;
         });
     }
