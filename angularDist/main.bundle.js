@@ -424,7 +424,7 @@ module.exports = ""
 /***/ "./src/app/savedlist/savedlist.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<label for=\"favorite\">Favorite Input:</label><br>\r\n<input type=\"text\" id=\"favoriteInput\"><br>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addFavorite()\">Add a favorite restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeFavorite()\">Remove a favorite restaurant</a>\r\n\r\n<label for=\"blocked\">Blocked Input:</label><br>\r\n<input type=\"text\" id=\"blockedInput\"><br>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addBlocked()\">Add a blocked restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeBlocked()\">Remove a blocked restaurant</a>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
+module.exports = "<label>Favorite Input:</label><br>\r\n<input type=\"text\" id=\"favoriteInput\"><br>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addFavorite()\">Add a favorite restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeFavorite()\">Remove a favorite restaurant</a><br>\r\n<br>\r\n\r\n<label>Blocked Input:</label><br>\r\n<input type=\"text\" id=\"blockedInput\"><br>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"addBlocked()\">Add a blocked restaurant</a>\r\n<a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"removeBlocked()\">Remove a blocked restaurant</a><br>\r\n<br>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Favorites</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"favorites\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>Blocked</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"blocked\"></sl-item>\r\n</table>\r\n\r\n<table id=\"userlists\">\r\n  <tr>\r\n    <th>History</th>\r\n  </tr>\r\n  <sl-item [inputList]=\"history\"></sl-item>\r\n</table>\r\n\r\n"
 
 /***/ }),
 
@@ -484,7 +484,6 @@ var SavedlistComponent = /** @class */ (function () {
         var index = this.savedList.favorites.findIndex(function (obj) { return obj.restaurantId == +removeFavorite; });
         if (index !== -1) {
             this.savedList.favorites.splice(index, 1);
-            console.log('spliced');
         }
         this.localService.saveSavedList(this.userId, this.savedList)
             .subscribe(function (result) { return _this.savedList = result; }, function () {
@@ -513,7 +512,7 @@ var SavedlistComponent = /** @class */ (function () {
     SavedlistComponent.prototype.removeBlocked = function () {
         var _this = this;
         var removeBlocked = document.getElementById("blockedInput").value;
-        var index = this.savedList.blocked.indexOf({ restaurantId: +removeBlocked });
+        var index = this.savedList.blocked.findIndex(function (obj) { return obj.restaurantId == +removeBlocked; });
         if (index !== -1) {
             this.savedList.blocked.splice(index, 1);
         }
