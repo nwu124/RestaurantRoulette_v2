@@ -13,7 +13,6 @@ var GooglePassport_1 = require("./GooglePassport");
 var passport = require("passport");
 var App = /** @class */ (function () {
     function App() {
-        this.googlePassportObj = new GooglePassport_1["default"]();
         this.expressApp = express();
         this.middleware();
         this.routes();
@@ -21,12 +20,17 @@ var App = /** @class */ (function () {
         this.Users = new UserModel_1.userModel();
         this.Restaurants = new RestaurantModel_1.restaurantModel();
         this.SavedLists = new SavedListModel_1.savedListModel();
+        this.googlePassportObj = new GooglePassport_1["default"](this.Users);
     }
     App.prototype.middleware = function () {
         this.expressApp.use(logger('dev'));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({ extended: false }));
-        this.expressApp.use(session({ secret: 'mi1Oo19jV4hrYUilwxV55q0I' }));
+        this.expressApp.use(session({
+            secret: 'mi1Oo19jV4hrYUilwxV55q0I',
+            resave: true,
+            saveUninitialized: true
+        }));
         this.expressApp.use(cookieParser());
         this.expressApp.use(passport.initialize());
         this.expressApp.use(passport.session());

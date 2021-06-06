@@ -31,8 +31,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node AppServer.js",
-    "test": "mocha"
+    "start": "node AppServer.js"
   },
   "author": "",
   "license": "ISC"

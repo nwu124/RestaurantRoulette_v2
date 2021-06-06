@@ -36,7 +36,7 @@ before(function (done) {
 });
 
 describe('Restaurant Tests', function() {
-  describe('Single Restaurant Validation', function() {
+  describe('Get Single Restaurant Validation', function() {
     it('Validate response status', function() {
       expect(singleRestaurantResponse).to.have.status(200);
     });
@@ -65,7 +65,7 @@ describe('Restaurant Tests', function() {
     });
   });
 
-  describe('Restaurant List Validation', function() {
+  describe('Get Multiple Restaurant Validation', function() {
     it('Validate response status', function() {
       expect(listRestaurantResponse).to.have.status(200);
     });

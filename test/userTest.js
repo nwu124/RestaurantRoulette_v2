@@ -36,7 +36,7 @@ before(function (done) {
 });
 
 describe('User Tests', function() {
-  describe('Single User Validation', function() {
+  describe('Get Single User Validation', function() {
     it('Validate response status', function() {
       expect(singleUserResponse).to.have.status(200);
     });
@@ -57,7 +57,7 @@ describe('User Tests', function() {
       expect(singleUserResponse.body).to.have.property('lastLogin').to.equal('05-1-2021');
     });
   });
-  describe('User List Validation', function() {
+  describe('Get Multiple User Validation', function() {
     it('Validate response status', function() {
       expect(listUserResponse).to.have.status(200);
     });

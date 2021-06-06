@@ -12,9 +12,11 @@ export class UserComponent implements OnInit {
 
   user: IUserModelAngular;
   private userId: number;
-  private username: string;
-  private password: string;
-  private loginStatus: number;
+  private loginType: string;
+  private firstname: string;
+  private lastname: string;
+  private email: string;
+  private photoUrl: string;
   private lastLogin: string;
 
   constructor(private route: ActivatedRoute, service: rrService) {
@@ -25,9 +27,12 @@ export class UserComponent implements OnInit {
         () => {console.log('GET User call ERROR'); },
         () => {
           console.log('GET User call OK User Id:' + this.userId);
-          this.username = this.user.username;
-          this.password = this.user.password;
-          this.loginStatus = this.user.loginStatus;
+          this.userId = this.user.userId;
+          this.loginType = this.user.loginType;
+          this.firstname = this.user.firstname;
+          this.lastname = this.user.lastname;
+          this.email = this.user.email;
+          this.photoUrl = this.user.photoUrl;
           this.lastLogin = this.user.lastLogin;
         }
       );

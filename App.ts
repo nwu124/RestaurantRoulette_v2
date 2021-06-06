@@ -20,22 +20,27 @@ class App {
     public googlePassportObj:GooglePassportObj;
 
     constructor() {
-        this.googlePassportObj = new GooglePassportObj();
-
         this.expressApp = express();
+
         this.middleware();
         this.routes();
         this.idGenerator = 999;
         this.Users = new userModel();
         this.Restaurants = new restaurantModel();
         this.SavedLists = new savedListModel();
+        this.googlePassportObj = new GooglePassportObj(this.Users);
     }
 
     private middleware(): void {
         this.expressApp.use(logger('dev'));
         this.expressApp.use(bodyParser.json());
         this.expressApp.use(bodyParser.urlencoded({extended: false}));
-        this.expressApp.use(session({ secret: 'mi1Oo19jV4hrYUilwxV55q0I' }));
+        this.expressApp.use(
+            session({
+                secret: 'mi1Oo19jV4hrYUilwxV55q0I',
+                resave: true,
+                saveUninitialized: true,
+            }));
         this.expressApp.use(cookieParser());
         this.expressApp.use(passport.initialize());
         this.expressApp.use(passport.session());

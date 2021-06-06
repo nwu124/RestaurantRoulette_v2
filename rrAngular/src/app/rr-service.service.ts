@@ -56,7 +56,7 @@ export class rrService {
   }
 
   saveSavedList(index: string, savedList: ISavedListModelAngular) {
-    return this.http.put(this.getPrepend() + '/app/savedlist/' + index, savedList)
+    return this.http.put(this.getPrepend() + '/app/savedlist/update/' + index, JSON.parse(JSON.stringify(savedList)))
       .map(response => response.json());
   }
 

@@ -1,4 +1,17 @@
-<a class="btn btn-lg btn-primary" role="button" (click)="updateSavedList()">Add a favorite</a>
+<div>
+  <label>Favorite Input:</label><br>
+  <input type="text" id="favoriteInput"><br>
+  <a class="btn btn-lg btn-primary" role="button" (click)="addFavorite()">Add a favorite restaurant</a>
+  <a class="btn btn-lg btn-primary" role="button" (click)="removeFavorite()">Remove a favorite restaurant</a><br>
+  <br>
+
+  <label>Blocked Input:</label><br>
+  <input type="text" id="blockedInput"><br>
+  <a class="btn btn-lg btn-primary" role="button" (click)="addBlocked()">Add a blocked restaurant</a>
+  <a class="btn btn-lg btn-primary" role="button" (click)="removeBlocked()">Remove a blocked restaurant</a><br>
+  <br>
+</div>
+
 
 <table id="userlists">
   <tr>
