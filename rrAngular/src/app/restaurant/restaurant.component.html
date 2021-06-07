@@ -31,7 +31,7 @@
     <th>Review</th>
   </tr>
   <tr *ngFor="let result of feedback; let i = index">
-    <td> <a [routerLink]="['/user/', result.userID]">{{result.userID}}</a></td>
+    <td> <a [routerLink]="['/app/protected/user/', result.userID]">{{result.userID}}</a></td>
     <td>{{result.rating}}</td>
     <td>{{result.comment}}</td>
   </tr>

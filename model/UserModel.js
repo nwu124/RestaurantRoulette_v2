@@ -1,16 +1,15 @@
 "use strict";
-exports.__esModule = true;
-exports.userModel = void 0;
-var Mongoose = require("mongoose");
-var DataAccess_1 = require("./../DataAccess");
-var mongooseConnection = DataAccess_1.dataAccess.mongooseConnection;
-var mongooseObj = DataAccess_1.dataAccess.mongooseInstance;
-var userModel = /** @class */ (function () {
-    function userModel() {
+Object.defineProperty(exports, "__esModule", { value: true });
+const Mongoose = require("mongoose");
+const DataAccess_1 = require("./../DataAccess");
+let mongooseConnection = DataAccess_1.dataAccess.mongooseConnection;
+let mongooseObj = DataAccess_1.dataAccess.mongooseInstance;
+class userModel {
+    constructor() {
         this.createSchema();
         this.createModel();
     }
-    userModel.prototype.createSchema = function () {
+    createSchema() {
         this.schema = new Mongoose.Schema({
             userId: Number,
             loginType: String,
@@ -18,24 +17,23 @@ var userModel = /** @class */ (function () {
             lastname: String,
             email: String,
             photoUrl: String,
-            lastLogin: String
+            lastLogin: String,
         }, { collection: 'users' });
-    };
-    userModel.prototype.createModel = function () {
+    }
+    createModel() {
         this.model = mongooseConnection.model("User", this.schema);
-    };
-    userModel.prototype.retrieveUserDetails = function (response, filter) {
+    }
+    retrieveUserDetails(response, filter) {
         var query = this.model.findOne(filter);
-        query.exec(function (err, itemArray) {
+        query.exec((err, itemArray) => {
             response.json(itemArray);
         });
-    };
-    userModel.prototype.retrieveAllUsers = function (response) {
+    }
+    retrieveAllUsers(response) {
         var query = this.model.find({});
-        query.exec(function (err, itemArray) {
+        query.exec((err, itemArray) => {
             response.json(itemArray);
         });
-    };
-    return userModel;
-}());
+    }
+}
 exports.userModel = userModel;

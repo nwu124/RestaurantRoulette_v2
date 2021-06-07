@@ -7,7 +7,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let result of inputList; let i = index">
-    <td>{{i + 1}}.</td><td> <a [routerLink]="['/restaurant/', result.restaurantId]">{{result.restaurantId}}</a></td>
+    <td>{{i + 1}}.</td><td> <a [routerLink]="['/app/restaurant/', result.restaurantId]">{{result.restaurantId}}</a></td>
   </tr>
   </tbody>
 </table>

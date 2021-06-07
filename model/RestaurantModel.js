@@ -1,16 +1,15 @@
 "use strict";
-exports.__esModule = true;
-exports.restaurantModel = void 0;
-var Mongoose = require("mongoose");
-var DataAccess_1 = require("./../DataAccess");
-var mongooseConnection = DataAccess_1.dataAccess.mongooseConnection;
-var mongooseObj = DataAccess_1.dataAccess.mongooseInstance;
-var restaurantModel = /** @class */ (function () {
-    function restaurantModel() {
+Object.defineProperty(exports, "__esModule", { value: true });
+const Mongoose = require("mongoose");
+const DataAccess_1 = require("./../DataAccess");
+let mongooseConnection = DataAccess_1.dataAccess.mongooseConnection;
+let mongooseObj = DataAccess_1.dataAccess.mongooseInstance;
+class restaurantModel {
+    constructor() {
         this.createSchema();
         this.createModel();
     }
-    restaurantModel.prototype.createSchema = function () {
+    createSchema() {
         this.schema = new Mongoose.Schema({
             restaurantId: Number,
             name: String,
@@ -37,22 +36,21 @@ var restaurantModel = /** @class */ (function () {
                 }
             ]
         }, { collection: 'restaurants' });
-    };
-    restaurantModel.prototype.createModel = function () {
+    }
+    createModel() {
         this.model = mongooseConnection.model("Restaurant", this.schema);
-    };
-    restaurantModel.prototype.retrieveRestaurantDetails = function (response, filter) {
+    }
+    retrieveRestaurantDetails(response, filter) {
         var query = this.model.findOne(filter);
-        query.exec(function (err, itemArray) {
+        query.exec((err, itemArray) => {
             response.json(itemArray);
         });
-    };
-    restaurantModel.prototype.retrieveAllRestaurants = function (response) {
+    }
+    retrieveAllRestaurants(response) {
         var query = this.model.find({});
-        query.exec(function (err, itemArray) {
+        query.exec((err, itemArray) => {
             response.json(itemArray);
         });
-    };
-    return restaurantModel;
-}());
+    }
+}
 exports.restaurantModel = restaurantModel;

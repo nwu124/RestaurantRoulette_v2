@@ -5,28 +5,16 @@
     </div>
     <br>
     <div>
-      <table class="table" style="font-size:10pt;">
-        <thead>
-        <tr>
-          <th>Restaurant</th>
-          <th width="5%">City</th>
-          <th width="5%">State</th>
-          <th width="5%">Zip</th>
-          <th width="5%">Price</th>
-          <th width="5%">URL</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let restaurant of restaurantList">
-          <td><a [routerLink]="['/restaurant/', restaurant.restaurantId]">{{restaurant.name}}</a></td>
-          <td>{{restaurant.locationCity}}</td>
-          <td>{{restaurant.locationState}}</td>
-          <td>{{restaurant.locationZip}}</td>
-          <td>{{restaurant.price}}</td>
-          <td><a href="{{restaurant.url}}">{{restaurant.url}}</a></td>
-        </tr>
-        </tbody>
-      </table>
+      <ul class="list-group">
+        <li class= "list-group-item" *ngFor="let restaurant of restaurantList">
+            <a [routerLink]="['/app/restaurant/', restaurant.restaurantId]" class="list-group-item">
+              <h4 class="list-group-item-heading">{{restaurant.name}}</h4>
+              <h4>{{restaurant.price}}</h4>
+              <h4 class="list-group-item-text">{{restaurant.locationCity}}, {{restaurant.locationState}}
+                {{restaurant.locationZip}}</h4>
+              <h4><a href="{{restaurant.url}}">{{restaurant.url}}</a></h4>
+            </a>
+      </ul>
 
       <table class="table" style="font-size:10pt;">
         <thead>

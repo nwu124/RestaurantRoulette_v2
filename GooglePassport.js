@@ -1,33 +1,24 @@
 "use strict";
-exports.__esModule = true;
-var googleOauth2_1 = require("./googleOauth2");
-var passport = require('passport');
-var UserModel = require('./model/UserModel');
-var GoogleStrategy = require('passport-google-oauth20-with-people-api').Strategy;
+Object.defineProperty(exports, "__esModule", { value: true });
+const googleOauth2_1 = require("./config/googleOauth2");
+let passport = require('passport');
+let UserModel = require('./model/UserModel');
+let GoogleStrategy = require('passport-google-oauth20-with-people-api').Strategy;
 // Creates a Passport configuration for Google
-var GooglePassport = /** @class */ (function () {
-    function GooglePassport(users) {
-        this.clientId = googleOauth2_1["default"].id;
-        this.secretId = googleOauth2_1["default"].secret;
-        this.isAzure = process.env.HOST ? true : false;
+class GooglePassport {
+    constructor(users, savedList) {
+        this.clientId = googleOauth2_1.default.id;
+        this.secretId = googleOauth2_1.default.secret;
         this.Users = users;
-        console.log("Users " + this.Users);
-        // this.host = this.isAzure ? process.env.HOST : "localhost";
-        // this.port = this.isAzure ? process.env.PORT : 8080
-        this.callbackPrepend = this.isAzure ?
-            "https://rrwebappsu.azurewebsites.net" : "http://localhost:8080";
-        //
-        // this.callbackPrepend = "https://rrwebappsu.azurewebsites.net";
+        this.callbackPrepend = "https://rrwebappsu.azurewebsites.net"; //"http://localhost:8080";
         passport.use(new GoogleStrategy({
             clientID: this.clientId,
             clientSecret: this.secretId,
             callbackURL: this.callbackPrepend + "/auth/google/callback",
             users: this.Users
-            //                profileFields: ['id', 'displayName', 'emails']
-        }, function (accessToken, refreshToken, profile, done) {
+        }, (accessToken, refreshToken, profile, done) => {
             console.log("inside new password google strategy");
-            console.log("UserModel " + JSON.stringify(users));
-            users.model.findOne({ userId: profile.id }).then(function (currentUser) {
+            users.model.findOne({ userId: profile.id }).then((currentUser) => {
                 if (currentUser) {
                     console.log("we already have a record with the given profile ID");
                     //if we already have a record with the given profile ID
@@ -36,7 +27,8 @@ var GooglePassport = /** @class */ (function () {
                 else {
                     console.log("Create user");
                     //if not, create a new user
-                    var jsonObj = {
+
+                    var newUser = {
                         userId: profile.id,
                         email: profile.emails[0].value,
                         photoUrl: profile.photos[0].value,
@@ -45,30 +37,48 @@ var GooglePassport = /** @class */ (function () {
                         loginType: 'Google',
                         lastLogin: new Date()
                     };
-                    users.model.create([jsonObj]).then(function (newUser) {
-                        done(null, newUser);
+
+                    var newSavedList = {
+                        userId: profile.id,
+                        favorites: [
+                            {
+                                restaurantId: 1
+                            }
+                        ],
+                        blocked: [
+                            {
+                                restaurantId: 2
+                            }
+                        ],
+                        history: [
+                            {
+                                restaurantId: 3
+                            }
+                        ]
+                    };
+
+                    users.model.create([newUser]).then((newUser) => {
+                        savedList.model.create([newSavedList]).then((newList) => {
+                            done(null, newUser);
+                        });
                     });
                 }
             });
-            process.nextTick(function () {
-                console.log('validating google profile:' + JSON.stringify(profile));
-                console.log("userId:" + profile.id);
-                console.log("displayName: " + profile.displayName);
-                console.log("retrieve all of the profile info needed");
-                // this.email = profile.emails[0].value;
+            process.nextTick(() => {
                 return done(null, profile);
             });
         }));
+
         passport.serializeUser(function (user, done) {
-            console.log('Called passport.serializeUser');
+            console.log('Passport.serializeUser called');
             done(null, user);
         });
+
         passport.deserializeUser(function (user, done) {
             var id = user.id;
-            console.log('Passport query single user with id: ' + id);
+            console.log('Passport.deserializeUser user with id: ' + id);
             done(null, user);
         });
     }
-    return GooglePassport;
-}());
-exports["default"] = GooglePassport;
+}
+exports.default = GooglePassport;

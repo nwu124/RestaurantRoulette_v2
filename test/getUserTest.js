@@ -10,6 +10,7 @@ var http = require('http');
 chai.use(chaiHttp);
 
 var url = 'https://rrwebappsu.azurewebsites.net';
+var updatedListUserResponse;
 
 before(function (done) {
   // fetch single user
@@ -32,10 +33,10 @@ before(function (done) {
 
   setTimeout(function(){
     done();
-  },1500)
+  },1000)
 });
 
-describe('User Tests', function() {
+describe('Get User Tests', function() {
   describe('Get Single User Validation', function() {
     it('Validate response status', function() {
       expect(singleUserResponse).to.have.status(200);
@@ -43,18 +44,22 @@ describe('User Tests', function() {
     it('Validate user fields', function() {
       expect(singleUserResponse.body).to.have.property('_id').to.be.a('string');
       expect(singleUserResponse.body).to.have.property('userId').to.be.a('number');
-      expect(singleUserResponse.body).to.have.property('username').to.be.a('string');
-      expect(singleUserResponse.body).to.have.property('password').to.be.a('string');
-      expect(singleUserResponse.body).to.have.property('loginStatus').to.be.a('number');
+      expect(singleUserResponse.body).to.have.property('loginType').to.be.a('string');
+      expect(singleUserResponse.body).to.have.property('firstname').to.be.a('string');
+      expect(singleUserResponse.body).to.have.property('lastname').to.be.a('string');
+      expect(singleUserResponse.body).to.have.property('email').to.be.a('string');
+      expect(singleUserResponse.body).to.have.property('photoUrl').to.be.a('string');
       expect(singleUserResponse.body).to.have.property('lastLogin').to.be.a('string');
     });
     it('Validate user values', function() {
       expect(singleUserResponse.body).to.have.property('_id');
       expect(singleUserResponse.body).to.have.property('userId').to.equal(1);
-      expect(singleUserResponse.body).to.have.property('username').to.equal('Nathan');
-      expect(singleUserResponse.body).to.have.property('password').to.equal('pw1');
-      expect(singleUserResponse.body).to.have.property('loginStatus').to.equal(0);
-      expect(singleUserResponse.body).to.have.property('lastLogin').to.equal('05-1-2021');
+      expect(singleUserResponse.body).to.have.property('loginType').to.equal('Google');
+      expect(singleUserResponse.body).to.have.property('firstname').to.equal('Nathaniel');
+      expect(singleUserResponse.body).to.have.property('lastname').to.equal('Wu');
+      expect(singleUserResponse.body).to.have.property('email').to.equal('nwu@seattleu.edu');
+      expect(singleUserResponse.body).to.have.property('photoUrl').to.equal('https://sample.photourl.com/');
+      expect(singleUserResponse.body).to.have.property('lastLogin').to.equal('June 06 2021 12:00 PM PST');
     });
   });
   describe('Get Multiple User Validation', function() {
@@ -68,11 +73,20 @@ describe('User Tests', function() {
       for (i = 0; i < listUserResponse.body.length; i++) {
         expect(listUserResponse.body[i]).to.have.property('_id').to.be.a('string');
         expect(listUserResponse.body[i]).to.have.property('userId').to.be.a('number');
-        expect(listUserResponse.body[i]).to.have.property('username').to.be.a('string');
-        expect(listUserResponse.body[i]).to.have.property('password').to.be.a('string');
-        expect(listUserResponse.body[i]).to.have.property('loginStatus').to.be.a('number');
+        expect(listUserResponse.body[i]).to.have.property('loginType').to.be.a('string');
+        expect(listUserResponse.body[i]).to.have.property('firstname').to.be.a('string');
+        expect(listUserResponse.body[i]).to.have.property('lastname').to.be.a('string');
+        expect(listUserResponse.body[i]).to.have.property('email').to.be.a('string');
+        expect(listUserResponse.body[i]).to.have.property('photoUrl').to.be.a('string');
         expect(listUserResponse.body[i]).to.have.property('lastLogin').to.be.a('string');
       }
+    });
+  });
+
+  describe('Pre-Post User Validation', function() {
+    it('Validate that the test user does not exist', function () {
+      const filteredResponse = listUserResponse.body.filter(object => object.firstname === 'firstname_test');
+      expect(filteredResponse).to.have.length(0);
     });
   });
 });

@@ -61,42 +61,4 @@ describe('SavedList Tests', function() {
       }
     });
   });
-  describe('Put SavedList Validation for User 1', function() {
-    it('Validate favorite with restaurantId = 99999 does not exist', function () {
-      const filteredResponse = singleSavedListResponse.body.filter(object => object.restaurantId === '99999');
-      expect(filteredResponse).to.be.null;
-    });
-
-    // put new SavedList favorite
-    chai.request(url)
-        .get("/app/savedlist/update/1")
-        .end(function (err, res) {
-          listSavedListResponse = res;
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-        });
-
-    it('Validate response status', function () {
-      expect(listSavedListResponse).to.have.status(200);
-    });
-    it('Validate favorite with restaurantId = 99999 exists', function () {
-      expect(listSavedListResponse).to.have.status(200);
-    });
-
-    // remove added SavedList favorite
-    chai.request(url)
-        .get("/app/savedlist/update/1")
-        .end(function (err, res) {
-          listSavedListResponse = res;
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-        });
-
-    it('Validate response status', function () {
-      expect(listSavedListResponse).to.have.status(200);
-    });
-    it('Validate favorite with restaurantId = 99999 does not exist', function () {
-      expect(singleSavedListResponse.body).to.have.status(200);
-    });
-  });
 });

@@ -17,6 +17,56 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
+/***/ "./src/app/AuthGuard.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuard; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rr_service_service__ = __webpack_require__("./src/app/rr-service.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthGuard = /** @class */ (function () {
+    //Constructor
+    function AuthGuard(router, service) {
+        var _this = this;
+        this.router = router;
+        this.authInfo = { isAuth: false, userId: -1 };
+        service.getAuthStatus()
+            .subscribe(function (result) { return _this.authInfo = result; }, function () { console.log('GET getAuthStatus call ERROR'); _this.authInfo.isAuth = false; }, function () {
+            console.log('GET getAuthStatus call OK, isAuth:' + _this.authInfo.isAuth);
+        });
+    }
+    AuthGuard.prototype.canActivate = function () {
+        //Your redirect logic/condition. I use this.
+        if (!this.authInfo.isAuth) {
+            this.router.navigate(['auth/login']);
+        }
+        console.log('AuthGuard#canActivate called');
+        return true;
+    };
+    AuthGuard = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */], __WEBPACK_IMPORTED_MODULE_2__rr_service_service__["a" /* rrService */]])
+    ], AuthGuard);
+    return AuthGuard;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/app.component.css":
 /***/ (function(module, exports) {
 
@@ -27,7 +77,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\r\n    <div class=\"container-fluid\">\r\n        <div class=\"navbar-header\">\r\n        <a class=\"navbar-brand\" href=\"javascript:initXHR('home')\">Restaurant Roulette</a>\r\n        </div>\r\n        <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n        <ul class=\"nav navbar-nav\">\r\n          <li><a [routerLink]=\"['/']\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Home</a></li>\r\n          <li><a [routerLink]=\"['app/protected/user', 1]\"  class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">User</a></li>\r\n          <li><a [routerLink]=\"['app/protected/user', 2]\"  class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">User2</a></li>\r\n        </ul>\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n\r\n            <li><a href=\"auth/google\">Login</a></li>\r\n            <li><a href=\"auth/logout\">Logout</a></li>\r\n        </ul>\r\n        </div><!--/.nav-collapse -->\r\n    </div><!--/.container-fluid -->\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<nav class=\"navbar navbar-default\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"navbar-header\">\r\n      <a class=\"navbar-brand\" href=\"javascript:initXHR('home')\">Restaurant Roulette</a>\r\n    </div>\r\n    <div id=\"navbar\" class=\"navbar-collapse collapse\">\r\n      <ul class=\"nav navbar-nav\">\r\n          <li><a [routerLink]=\"['/']\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">Home</a></li>\r\n        <div *ngIf=\"authInfo.isAuth\"><li><a [routerLink]=\"['app/protected/user', authInfo.userId]\"  class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\">User Profile</a></li></div>\r\n      </ul>\r\n      <ul class=\"nav navbar-nav navbar-right\">\r\n\r\n        <div *ngIf=\"!authInfo.isAuth\">\r\n          <li><a href=\"auth/google\">Login</a></li>\r\n        </div>\r\n        <div *ngIf=\"authInfo.isAuth\">\r\n          <li><a href=\"auth/logout\">Logout</a></li>\r\n        </div>\r\n      </ul>\r\n    </div><!--/.nav-collapse -->\r\n  </div><!--/.container-fluid -->\r\n</nav>\r\n\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -37,23 +87,35 @@ module.exports = "<nav class=\"navbar navbar-default\">\r\n    <div class=\"cont
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rr_service_service__ = __webpack_require__("./src/app/rr-service.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(service) {
+        var _this = this;
         this.title = 'app works!';
+        this.authInfo = { isAuth: false, userId: -1 };
+        service.getAuthStatus()
+            .subscribe(function (result) { return _this.authInfo = result; }, function () { console.log('GET getAuthStatus call ERROR'); _this.authInfo.isAuth = false; }, function () {
+            console.log('GET getAuthStatus call OK, isAuth:' + _this.authInfo.isAuth);
+        });
     }
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-root',
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__rr_service_service__["a" /* rrService */]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -82,12 +144,16 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__savedlist_sl_item_sl_item_component__ = __webpack_require__("./src/app/savedlist/sl-item/sl-item.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__restaurant_list_restaurant_list_component__ = __webpack_require__("./src/app/restaurant-list/restaurant-list.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__login_login_component__ = __webpack_require__("./src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__AuthGuard__ = __webpack_require__("./src/app/AuthGuard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -116,7 +182,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_10__user_user_component__["a" /* UserComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__savedlist_savedlist_component__["a" /* SavedlistComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__savedlist_sl_item_sl_item_component__["a" /* SlItemComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__restaurant_list_restaurant_list_component__["a" /* RestaurantListComponent */]
+                __WEBPACK_IMPORTED_MODULE_13__restaurant_list_restaurant_list_component__["a" /* RestaurantListComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__login_login_component__["a" /* LoginComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -124,7 +191,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_6__app_routing__["a" /* routing */],
             ],
-            providers: [{ provide: __WEBPACK_IMPORTED_MODULE_5__angular_common__["a" /* APP_BASE_HREF */], useValue: '/' }, __WEBPACK_IMPORTED_MODULE_7_app_rr_service_service__["a" /* rrService */]],
+            providers: [{ provide: __WEBPACK_IMPORTED_MODULE_5__angular_common__["a" /* APP_BASE_HREF */], useValue: '/' }, __WEBPACK_IMPORTED_MODULE_7_app_rr_service_service__["a" /* rrService */], __WEBPACK_IMPORTED_MODULE_16__AuthGuard__["a" /* AuthGuard */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
@@ -146,6 +213,10 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__restaurant_list_restaurant_list_component__ = __webpack_require__("./src/app/restaurant-list/restaurant-list.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__user_user_component__ = __webpack_require__("./src/app/user/user.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__savedlist_savedlist_component__ = __webpack_require__("./src/app/savedlist/savedlist.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login_component__ = __webpack_require__("./src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__AuthGuard__ = __webpack_require__("./src/app/AuthGuard.ts");
+
+
 
 
 
@@ -154,12 +225,74 @@ var AppModule = /** @class */ (function () {
 
 var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_1__welcome_welcome_component__["a" /* WelcomeComponent */] },
-    { path: 'app/restaurant/:id', component: __WEBPACK_IMPORTED_MODULE_2__restaurant_restaurant_component__["a" /* RestaurantComponent */] },
-    { path: 'app/restaurant', component: __WEBPACK_IMPORTED_MODULE_3__restaurant_list_restaurant_list_component__["a" /* RestaurantListComponent */] },
-    { path: 'app/protected/user/:id', component: __WEBPACK_IMPORTED_MODULE_4__user_user_component__["a" /* UserComponent */] },
-    { path: 'app/protected/savedlist/:id', component: __WEBPACK_IMPORTED_MODULE_5__savedlist_savedlist_component__["a" /* SavedlistComponent */] }
+    { path: 'auth/login', component: __WEBPACK_IMPORTED_MODULE_6__login_login_component__["a" /* LoginComponent */] },
+    { path: 'app/restaurant/:id', component: __WEBPACK_IMPORTED_MODULE_2__restaurant_restaurant_component__["a" /* RestaurantComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_7__AuthGuard__["a" /* AuthGuard */]] },
+    { path: 'app/restaurant', component: __WEBPACK_IMPORTED_MODULE_3__restaurant_list_restaurant_list_component__["a" /* RestaurantListComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_7__AuthGuard__["a" /* AuthGuard */]] },
+    { path: 'app/protected/user/:id', component: __WEBPACK_IMPORTED_MODULE_4__user_user_component__["a" /* UserComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_7__AuthGuard__["a" /* AuthGuard */]] },
+    { path: 'app/protected/savedlist/:id', component: __WEBPACK_IMPORTED_MODULE_5__savedlist_savedlist_component__["a" /* SavedlistComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_7__AuthGuard__["a" /* AuthGuard */]] }
 ];
-var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forRoot(routes, { useHash: true });
+var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */].forRoot(routes, { useHash: true });
+
+
+/***/ }),
+
+/***/ "./src/app/login/login.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/login/login.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\r\n<div class=\"container theme-showcase\">\r\n  <div class=\"jumbotron\">\r\n    <div class=\"container-fluid bg-1 text-center\">\r\n      <h1 class=\"margin\">Restaurant Roulette</h1>\r\n      <h2 class=\"margin\">Login</h2>\r\n      <img src=\"https://untappedcities.com/wp-content/uploads/2018/04/John-Donohue-All-the-Restaurants-in-New-York-the-New-Yorker-Corner-Bistro-NYC-Untapped-Cities-Alyssa-Ciardi1.jpg\" class=\"img-responsive img-circle margin\" style=\"display:inline\" alt=\"Restaurant\" width=\"250\" height=\"250\">\r\n      <img src=\"https://www.ediblebrooklyn.com/wp-content/uploads/sites/2/2017/06/image2.jpg\" class=\"img-responsive img-circle margin\" style=\"display:inline\" alt=\"Restaurant\" width=\"250\" height=\"250\">\r\n      <img src=\"https://cdn.shopify.com/s/files/1/1641/2641/products/Toms_1200x.jpg?v=1570035116\" class=\"img-responsive img-circle margin\" style=\"display:inline\" alt=\"Restaurant\" width=\"250\" height=\"250\">\r\n      <div *ngIf=\"!authInfo.isAuth\">\r\n        <h3>You are not logged in! <br> Please login with your Google account. </h3>\r\n        <div class=\"col-md-2\"> <button onclick=\"window.location.href='/auth/google'\" class=\"btn btn-primary btn-block\">Login</button> </div>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/login/login.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rr_service_service__ = __webpack_require__("./src/app/rr-service.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var LoginComponent = /** @class */ (function () {
+    function LoginComponent(route, service) {
+        var _this = this;
+        this.route = route;
+        this.authInfo = { isAuth: false, userId: -1 };
+        service.getAuthStatus()
+            .subscribe(function (result) { return _this.authInfo = result; }, function () { console.log('GET getAuthStatus call ERROR'); _this.authInfo.isAuth = false; }, function () {
+            console.log('GET getAuthStatus call OK, isAuth:' + _this.authInfo.isAuth);
+        });
+    }
+    LoginComponent.prototype.ngOnInit = function () {
+    };
+    LoginComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-login',
+            template: __webpack_require__("./src/app/login/login.component.html"),
+            styles: [__webpack_require__("./src/app/login/login.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */], __WEBPACK_IMPORTED_MODULE_2__rr_service_service__["a" /* rrService */]])
+    ], LoginComponent);
+    return LoginComponent;
+}());
+
 
 
 /***/ }),
@@ -174,7 +307,7 @@ module.exports = ""
 /***/ "./src/app/restaurant-list/restaurant-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>Restaurant List</h3>\r\n    </div>\r\n    <table class=\"table\" style=\"font-size:10pt;\">\r\n      <thead>\r\n      <tr>\r\n        <th>Roulette</th>\r\n        <th width=\"5%\"></th>\r\n        <th width=\"5%\">Name</th>\r\n        <th width=\"5%\">ID</th>\r\n        <th width=\"5%\"></th>\r\n        <th width=\"5%\"></th>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr>\r\n        <td><a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"pickRestaurant()\">Pick A Restaurant</a></td>\r\n        <td></td>\r\n        <td><textarea [(ngModel)]=\"restaurantIdDispName\" disabled=\"true\"></textarea></td>\r\n        <td><textarea [(ngModel)]=\"restaurantIdDispId\" disabled=\"true\"></textarea></td>\r\n        <td><textarea [(ngModel)]=\"longDisp\" disabled=\"true\"></textarea></td>\r\n        <td><textarea [(ngModel)]=\"latDisp\" disabled=\"true\"></textarea></td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n    <br>\r\n    <div>\r\n      <ul class=\"list-group\">\r\n        <li class= \"list-group-item\" *ngFor=\"let restaurant of restaurantList\">\r\n            <a [routerLink]=\"['/app/restaurant/', restaurant.restaurantId]\" class=\"list-group-item\">\r\n              <h4 class=\"list-group-item-heading\">{{restaurant.name}}</h4>\r\n              <h4>{{restaurant.price}}</h4>\r\n              <h4 class=\"list-group-item-text\">{{restaurant.locationCity}}, {{restaurant.locationState}}\r\n                {{restaurant.locationZip}}</h4>\r\n              <h4><a href=\"{{restaurant.url}}\">{{restaurant.url}}</a></h4>\r\n            </a>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>Restaurant List</h3>\r\n    </div>\r\n    <br>\r\n    <table class=\"table\" style=\"font-size:10pt;\">\r\n      <thead>\r\n      <tr>\r\n        <th>Roulette</th>\r\n        <th width=\"5%\"></th>\r\n        <th width=\"5%\">Name</th>\r\n        <th width=\"5%\">ID</th>\r\n        <th width=\"5%\"></th>\r\n        <th width=\"5%\"></th>\r\n      </tr>\r\n      </thead>\r\n      <tbody>\r\n      <tr>\r\n        <td><a class=\"btn btn-lg btn-primary\" role=\"button\" (click)=\"pickRestaurant()\">Pick A Restaurant</a></td>\r\n        <td></td>\r\n        <td><textarea [(ngModel)]=\"restaurantIdDispName\" disabled=\"true\"></textarea></td>\r\n        <td><textarea [(ngModel)]=\"restaurantIdDispId\" disabled=\"true\"></textarea></td>\r\n        <td><textarea [(ngModel)]=\"longDisp\" disabled=\"true\"></textarea></td>\r\n        <td><textarea [(ngModel)]=\"latDisp\" disabled=\"true\"></textarea></td>\r\n      </tr>\r\n      </tbody>\r\n    </table>\r\n    <div>\r\n      <ul class=\"list-group\">\r\n        <li class= \"list-group-item\" *ngFor=\"let restaurant of restaurantList\">\r\n            <a [routerLink]=\"['/app/restaurant/', restaurant.restaurantId]\" class=\"list-group-item\">\r\n              <h4 class=\"list-group-item-heading\">{{restaurant.name}}</h4>\r\n              <h4>{{restaurant.price}}</h4>\r\n              <h4 class=\"list-group-item-text\">{{restaurant.locationCity}}, {{restaurant.locationState}}\r\n                {{restaurant.locationZip}}</h4>\r\n              <h4><a href=\"{{restaurant.url}}\">{{restaurant.url}}</a></h4>\r\n            </a>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -370,6 +503,10 @@ var rrService = /** @class */ (function () {
         }
         //Assume running locally mongoose server uses local port
         return "http://" + this.expressHost + ":" + this.localPort;
+    };
+    rrService.prototype.getAuthStatus = function () {
+        return this.http.get(this.getPrepend() + '/auth/isAuth')
+            .map(function (response) { return response.json(); });
     };
     rrService.prototype.getAllSavedLists = function () {
         return this.http.get(this.getPrepend() + '/app/savedlist')
@@ -653,7 +790,7 @@ module.exports = ""
 /***/ "./src/app/user/user.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>{{firstname}} {{lastname}}</h3>\r\n      <img src=\"https://www.seekpng.com/png/detail/72-729756_how-to-add-a-new-user-to-your.png\" width=\"100\" height=\"100\">\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th width=\"20%\">Email Address</th>\r\n          <th width=\"10%\">Login Type</th>\r\n          <th width=\"20%\">Last Login</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td>{{email}}</td>\r\n          <td>{{loginType}}</td>\r\n          <td>{{lastLogin}}</td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<app-savedlist></app-savedlist>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"panel panel-default\" style=\"border-width: 0px; border-style:solid\">\r\n    <div class=\"panel-default\">\r\n      <h3>{{firstname}} {{lastname}}</h3>\r\n      <img src=\"{{photoUrl}}\" width=\"100\" height=\"100\">\r\n    </div>\r\n    <br>\r\n    <div>\r\n      <table class=\"table\" style=\"font-size:10pt;\">\r\n        <thead>\r\n        <tr>\r\n          <th width=\"20%\">Email Address</th>\r\n          <th width=\"10%\">Login Type</th>\r\n          <th width=\"20%\">Last Login</th>\r\n        </tr>\r\n        </thead>\r\n        <tbody>\r\n        <tr>\r\n          <td>{{email}}</td>\r\n          <td>{{loginType}}</td>\r\n          <td>{{lastLogin}}</td>\r\n        </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<app-savedlist></app-savedlist>\r\n"
 
 /***/ }),
 

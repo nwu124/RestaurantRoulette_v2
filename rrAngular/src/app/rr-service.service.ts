@@ -25,6 +25,11 @@ export class rrService {
     return "http://" + this.expressHost + ":" + this.localPort;
   }
 
+  getAuthStatus() {
+    return this.http.get(this.getPrepend() + '/auth/isAuth')
+      .map(response => response.json());
+  }
+
   getAllSavedLists() {
     return this.http.get(this.getPrepend() + '/app/savedlist')
       .map(response => response.json());

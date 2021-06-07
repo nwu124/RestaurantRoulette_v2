@@ -1,5 +1,6 @@
-import googleAppAuth from './googleOauth2';
+import googleAppAuth from './config/googleOauth2';
 import {userModel} from "./model/UserModel";
+import {savedListModel} from "./model/SavedListModel";
 let passport = require('passport');
 let UserModel = require('./model/UserModel');
 let GoogleStrategy = require('passport-google-oauth20-with-people-api').Strategy;
@@ -14,31 +15,24 @@ class GooglePassport {
     callbackPrepend: string;
     private isAzure: boolean;
     private Users: userModel;
+    private SavedListModel: savedListModel;
 
-    constructor(users: userModel) {
+    constructor(users: userModel, savedList: savedListModel) {
         this.clientId = googleAppAuth.id;
         this.secretId = googleAppAuth.secret;
-        this.isAzure = process.env.HOST ? true : false;
         this.Users = users;
-        console.log("Users " + this.Users);
-        // this.host = this.isAzure ? process.env.HOST : "localhost";
-        // this.port = this.isAzure ? process.env.PORT : 8080
+        this.SavedListModel = savedList;
 
-        this.callbackPrepend = this.isAzure ?
-            "https://rrwebappsu.azurewebsites.net" : "http://localhost:8080";
-        //
-        // this.callbackPrepend = "https://rrwebappsu.azurewebsites.net";
+        this.callbackPrepend = "http://localhost:8080";
 
         passport.use(new GoogleStrategy({
                 clientID: this.clientId,
                 clientSecret: this.secretId,
                 callbackURL: this.callbackPrepend + "/auth/google/callback",
                 users: this.Users
-//                profileFields: ['id', 'displayName', 'emails']
             },
             (accessToken, refreshToken, profile, done) => {
                 console.log("inside new password google strategy");
-                console.log("UserModel " + JSON.stringify(users));
 
                 users.model.findOne({userId: profile.id}).then((currentUser) => {
                     if (currentUser) {
@@ -48,8 +42,7 @@ class GooglePassport {
                     } else {
                         console.log("Create user");
                         //if not, create a new user
-
-                        var jsonObj = {
+                        var newUser = {
                             userId: profile.id,
                             email: profile.emails[0].value,
                             photoUrl: profile.photos[0].value,
@@ -58,32 +51,47 @@ class GooglePassport {
                             loginType: 'Google',
                             lastLogin: new Date() };
 
-                        users.model.create([jsonObj]).then((newUser) => {
-                            done(null, newUser);
+                        var newSavedList = {
+                            userId: profile.id,
+                            favorites: [
+                                {
+                                    restaurantId: 1
+                                }
+                            ],
+                            blocked: [
+                                {
+                                    restaurantId: 2
+                                }
+                            ],
+                            history: [
+                                {
+                                    restaurantId: 3
+                                }
+                            ]
+                        };
+
+                        users.model.create([newUser]).then((newUser) => {
+                            savedList.model.create([newSavedList]).then((newList) => {
+                                done(null, newUser);
+                            });
                         });
                     }
                 })
 
-
                 process.nextTick(() => {
-                    console.log('validating google profile:' + JSON.stringify(profile));
-                    console.log("userId:" + profile.id);
-                    console.log("displayName: " + profile.displayName);
-                    console.log("retrieve all of the profile info needed");
-                    // this.email = profile.emails[0].value;
                     return done(null, profile);
                 });
             }
         ));
 
         passport.serializeUser(function (user, done) {
-            console.log('Called passport.serializeUser');
+            console.log('Passport.serializeUser called');
             done(null, user);
         });
 
         passport.deserializeUser(function (user, done) {
             var id = user.id;
-            console.log('Passport query single user with id: ' + id);
+            console.log('Passport.deserializeUser user with id: ' + id);
             done(null, user);
         });
     }

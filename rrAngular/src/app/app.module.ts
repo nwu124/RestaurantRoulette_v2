@@ -13,6 +13,8 @@ import {SavedlistComponent} from './savedlist/savedlist.component';
 import {SlItemComponent} from './savedlist/sl-item/sl-item.component';
 import {RestaurantListComponent} from './restaurant-list/restaurant-list.component';
 import {FormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
+import {AuthGuard} from "./AuthGuard";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {FormsModule} from "@angular/forms";
     UserComponent,
     SavedlistComponent,
     SlItemComponent,
-    RestaurantListComponent
+    RestaurantListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import {FormsModule} from "@angular/forms";
     HttpModule,
     routing,
   ],
-  providers: [ {provide: APP_BASE_HREF, useValue: '/'}, rrService ],
+  providers: [ {provide: APP_BASE_HREF, useValue: '/'}, rrService, AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
